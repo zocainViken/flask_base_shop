@@ -1,0 +1,68 @@
+
+python -m pip install flask-wtf
+flask wtf:
+form validation with flask
+
+python -m pip install flask-bcrypt
+from flask_bcrypt import Bcrypt
+https://flask-sqlalchemy.palletsprojects.com/en/2.x/quickstart/
+
+flask flash
+https://flask.palletsprojects.com/en/2.0.x/patterns/flashing/
+Flashing With Categories
+
+python -m pip install flask-uploads
+https://stackoverflow.com/questions/61628503/flask-uploads-importerror-cannot-import-name-secure-filename
+C:\Users\cozia\AppData\Local\Programs\Python\Python38\Lib\site-packages
+this:
+	from werkzeug import secure_filename,FileStorage
+to:
+	from werkzeug.utils import secure_filename
+	from werkzeug.datastructures import  FileStorage
+
+python -m pip install flask-msearch
+# for searchbar and find product
+
+
+python -m pip install email_validator
+
+
+
+
+python -m pip install flask_login
+
+
+# sql migration with flask
+python -m pip install flask-Migrate
+
+flask db init
+Usage: flask db init [OPTIONS]
+
+Error: Could not locate a Flask application. You did not provide the "FLASK_APP" environment variable, and a "wsgi.py" or "app.py" module was not found in the current directory.
+
+sooo
+linux
+export FLASK_APP=run.py
+flask db init
+
+windows
+set FLASK_APP=run.py
+flask db init
+
+flask db migrate -m 'initial migration'
+flask db upgrade# work for added column and we need some code in our init file
+
+
+# PDF Creator
+python -m pip install pdfkit
+#OSError: No wkhtmltopdf executable found: "b''"
+
+# python -m pip install wkhtmltopdf
+# https://wkhtmltopdf.org/downloads.html download and install then put it in environement variable
+# https://www.tutorialexample.com/fix-oserror-no-wkhtmltopdf-executable-found-in-win-10-for-pdfkit-beginner-python-pdfkit-tutorial/
+# https://github.com/wkhtmltopdf/wkhtmltopdf/issues/4460
+path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+options = {'enable-local-file-access': None}
+pdf = pdfkit.from_string(rendered, False, configuration=config, options=options)
+

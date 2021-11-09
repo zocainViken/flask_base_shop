@@ -1,0 +1,44 @@
+{% extends 'admin_area.html' %}
+
+{% block content %}
+
+
+
+{% include 'admin/_messages.html' %}
+{% from 'admin/_formhelper.html' import render_field %}
+<body>
+    <h2 class="">Image viewer</h2>
+
+   <form action="/" method="POST" enctype='multipart/form-data'>
+        <div class="image_container">
+            <h2 >Add Images</h2>
+            <div class="image_card_input">
+                <input type="text" value="add name" name="image_name" class="form_basic">
+                <input type="textarea" value="add description" class="add_button">
+                <input type="file" id="image_1">
+            </div>
+            
+            <div class="image_card_input">
+                <input type="text"  value="add name" name="image_name" class="form_basic">
+                <input type="textarea" value="add description" class="add_button">
+                <input type="file" id="image_2">
+            </div>
+
+            
+            <div class="image_card_input">
+                <input type="text" value="add name" name="image_name" class="form_basic">
+                <input type="textarea" value="add description" class="add_button">
+                <input type="file" id="image_3">
+            </div>
+
+            <!--
+            {{render_field(form.img_1)}}
+            {{render_field(form.img_2)}}
+            {{render_field(form.img_3)}}
+            -->
+
+            <input type="submit" value="Add image" class="add_button">
+        </div>   
+   </form>
+
+{% endblock content %}

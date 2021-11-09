@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    {% block content %}
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>{{title}}</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <!--<link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>-->
+    {% include 'admin/_messages.html' %}
+</head>
+
+{% include 'admin/navigation.html' %}
+
+<div class="product_container">
+    <table>
+        <thead>
+            <th>sr</th>
+            <th>Name</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </thead>
+        <tbody>
+            {% if updatebrand %}
+            <form action="", method="POST">
+                <h2>update brand</h2>
+                <input type="text" name="brand" value="{{updatebrand.name}}" class="form_basic">
+                <input type="submit" value="update brand" class="add_brand_button">
+            </form>
+            
+        </tbody>
+        {% elif updatecat %}
+            <form action="", method="POST">
+                <h2>update category</h2>
+                <input type="text" name="category" value="{{updatecat.name}}" class="form_basic">
+                <input type="submit" value="update category" class="add_brand_button">
+            </form>
+        </tbody>
+            {% endif %}
+    </table>
+</div>
+{% endblock content %}

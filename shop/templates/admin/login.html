@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>register</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    {% block content %}
+    <div style='text-align: center;'>
+        <h2>Login</h2>
+    </div>
+    {% from "admin/_formhelper.html" import render_field %}
+    <div style='text-align: center;'>
+        <table>
+        <!-- Ici, on écrira le contenu du tableau
+        <tr class="row">
+            <td class='col'>
+                {{ render_field(form.username) }}
+            </td>
+            <td class='col'>
+                {{ render_field(form.password) }}
+            </td>
+        </tr>    -->
+        </table>
+    </div>
+        <div class="form_container">
+            {% include 'admin/_messages.html' %}
+            <form  method='POST', enctype="multipart/form-data">
+                <dl>
+                    {{ render_field(form.username) }}
+                    {{ render_field(form.password) }}
+                </dl>
+                <input type='submit' value='Login' class="btn">
+            </form>
+        </div>
+    {% endblock content %}
+
+    

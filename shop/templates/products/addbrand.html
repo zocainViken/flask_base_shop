@@ -1,0 +1,17 @@
+{% extends 'admin_area.html' %}
+
+{% block content %}
+
+
+
+{% include 'admin/_messages.html' %}
+<div class="form_container">
+    {% from 'admin/_formhelper.html' import render_field %}
+    <form action="", method="POST">
+        <h2>add new brand</h2>
+        <input type="text" name="brand" class="form_basic">
+        <input type="submit" value="Add brand" class="add_brand_button">
+    </form>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,83 @@
+
+
+{% block content %}
+
+{% include 'admin/navigation.html' %}
+<head>
+    <title>Flask app</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  </head>
+
+
+{% include 'admin/_messages.html' %}
+
+
+
+<form class="add_product" action="/addproduct" method="POST" enctype='multipart/form-data'>
+    
+    <div class="product_container">
+        <h2 >Add Product</h2>
+        
+        <div class="product_header">
+            <h3 class="">Product name:</h3>
+            <input type="text" name="name" value="add name" >
+            
+
+            <h3 class="">Product description:</h3>
+            <input type="textarea" name="description" value="add description" >
+
+            <h3 class="">Product colors:</h3>
+            <input type="text" name="color" value="add color" >
+            
+            <select name="brand" class="form">
+                <option value="" class="">select a brand</option>
+                {% for brand in brands %}
+                <option value="{{brand.id}}" class="">{{brand.name}}</option>
+                {% endfor %}
+            </select>
+
+            <select name="category" class="form">
+            
+                <option value="" class="">select a category</option>
+                {% for category in categories %}
+                <option value="{{category.id}}" class="">{{category.name}}</option>
+                
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="product_body">
+            <h3 class="">Product discount:</h3>
+            <input type="text" name="discount" value="0" >
+            
+            <h3 class="">Product price:</h3>
+            <input type="textarea" name="price" value="150" >
+            
+            <h3 class="">Product stock:</h3>
+            <input type="text" name="stock" value="10" >
+        </div>
+
+        <div class="product_image">
+            <h2 >Add Images</h2>
+            
+            <div class="image_card_input">
+                <!--<input type="file" name="file[]">-->
+                <input type="file" name="image_1">
+            </div>
+            
+            <div class="image_card_input">
+                <input type="file" name="image_2">
+                <input type="file" name="image_3">
+            </div> 
+        </div>
+    </div>
+    
+    
+    
+    
+    <input type="submit" value="Add Product" class="add_button">   
+</form>
+
+
+
+{% endblock content %}

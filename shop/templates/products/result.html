@@ -1,0 +1,83 @@
+
+
+<!DOCTYPE html>
+<html>
+{% block content %}
+{% include 'head.html' %}
+
+<body>
+    {% include 'navigation.html' %}
+    <h2>product page template</h2>
+
+
+
+    <div class="product_container">
+        {% for product in products %}
+        <div class="product_card">
+            <img alt='' src="{{url_for('static', filename='images/' + product.image_1)}}", width="100", height="150">
+            <h2 class="product_title">{{product.name}}</h2>
+            {% if product.discount > 0 %}
+            <h3 class="product_discount">
+               discount  -{{product.discount}}%
+            </h3>
+            {% endif %}
+            <h3 class="product_price">
+                {{product.price}} €
+            </h3>
+            <div class="product_card_footer">
+                <span class="left">
+                    <form action="{{url_for('AddCart')}}" method="POST">
+                        <input type="hidden" name="product_id" value="{{product.id}}">
+                        <button type="submit">add cart</button>
+                        <input type="number" name="quantity" id="" value=1 min=1 max={{product.stock}} style="visibility: hidden;">
+                        {% set color = product.colors.split(',') %}
+                        <select name="colors" id="colors" style="visibility: hidden;">
+                            {% for color in colors %}
+                            {% set col = color.split(':') %}
+                            <option value="{{col[0]}}">
+                                {{col[0]|capitalize}}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                </span>
+                <span class="right">
+                    <a href="{{url_for('single_page', id=product.id)}}">details</a>
+                </span>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+    
+    
+
+</body>
+
+
+{% endblock content %}
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

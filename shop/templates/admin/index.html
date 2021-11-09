@@ -1,0 +1,20 @@
+
+{% block content %}
+<div>
+    <h2>admin page</h2>
+    <p>
+        Why my flash message didn't work ??<br>
+        flash message for greeting users
+    </p>
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+  <ul class=flashes>
+  {% for category, message in messages %}
+    <li class="{{ category }}">{{ message }}</li>
+  {% endfor %}
+  </ul>
+{% endif %}
+{% endwith %}
+</div>
+
+{% endblock content %}

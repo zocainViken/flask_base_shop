@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>{{title}}</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <!--<link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>-->
+    {% include 'admin/_messages.html' %}
+</head>
+{% block content %}
+{% include 'admin/navigation.html' %}
+
+<div class="product_container">
+    <table>
+        <thead>
+            <th>sr</th>
+            <th>Name</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </thead>
+        <tbody>
+            {% if brands %}
+            {% for brand in brands %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{brand.name}}</td>
+                <td><a href="{{url_for('updatebrand', id=brand.id)}}">Edit</a></td>
+                <td>
+                    <a href="{{url_for('deletebrand', id=brand.id)}}"> X </a>
+                </td>
+                
+
+            </tr>
+            {% endfor %}
+            {% else %}
+            {% for cat in category %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{cat.name}}</td>
+                <td><a href="{{url_for('updatecategory', id=cat.id)}}">Edit</a></td>
+                <td>
+                    <a href="{{url_for('deletecategory', id=cat.id)}}"> X </a>
+                </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
