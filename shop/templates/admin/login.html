@@ -7,38 +7,44 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>register</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel='stylesheet' type='text/css' media='screen'  href="{{ url_for('static', filename='css/main.css') }}">
     <script src='main.js'></script>
 </head>
 <body>
     {% block content %}
-    <div style='text-align: center;'>
-        <h2>Login</h2>
-    </div>
     {% from "admin/_formhelper.html" import render_field %}
-    <div style='text-align: center;'>
-        <table>
-        <!-- Ici, on écrira le contenu du tableau
-        <tr class="row">
-            <td class='col'>
+    <!--
+    <div class="form_container">
+        {% include 'admin/_messages.html' %}
+        <form  method='POST', enctype="multipart/form-data">
+            <dl>
                 {{ render_field(form.username) }}
-            </td>
-            <td class='col'>
                 {{ render_field(form.password) }}
-            </td>
-        </tr>    -->
-        </table>
+            </dl>
+            <input type='submit' value='Login' class="btn">
+        </form>
     </div>
-        <div class="form_container">
-            {% include 'admin/_messages.html' %}
-            <form  method='POST', enctype="multipart/form-data">
-                <dl>
-                    {{ render_field(form.username) }}
-                    {{ render_field(form.password) }}
-                </dl>
-                <input type='submit' value='Login' class="btn">
-            </form>
-        </div>
+    -->
+
+    <div class="screen">
+        <form method='POST', enctype="multipart/form-data" class="formcontainer">
+            <h2>Admin login</h2>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="username">
+                <span class="text">User Name</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="password" required="required" name="password">
+                <span class="text">Password</span>
+                <span class="line"></span>
+            </div>
+
+            <input type="submit" value="Login">
+        </form>
+    </div>
     {% endblock content %}
 
     

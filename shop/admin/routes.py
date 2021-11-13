@@ -29,10 +29,12 @@ def admin():
     return render_template('admin_area.html', title='admin page', products=products)
 
 
-@app.route('/login', methods=['GET', 'POST'] )
+@app.route('/adminlogin', methods=['GET', 'POST'] )
 def login():
     form = LoginForm(request.form)
     if request.method == 'POST':
+        print(form.username.data)
+        print(form.password.data)
         user = User.query.filter_by(username=form.username.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             session['username'] = form.username.data
@@ -66,20 +68,18 @@ def brands():
 
 
 
-@app.route('/registeradmin', methods=['GET', 'POST'] )
+@app.route('/adminregister', methods=['GET', 'POST'] )
 def register():
     form = RegistrationForm(request.form)
     
     if request.method == 'POST':# and form.validate():
-        print(form)
         hash_password = bcrypt.generate_password_hash(form.password.data)
-        print(hash_password)
         user = User(name=form.name.data,
                     username=form.username.data,
                     email=form.email.data,
                     password=hash_password)
         db.session.add(user)
         db.session.commit()
-        flash(f'Welcome {form.username.data}, thanks you for registering', 'success')
+        #flash(f'Welcome {form.username.data}, thanks you for registering', 'success')
         return redirect(url_for('login'))
     return render_template('admin/register.html',form=form, title='Registration Page')
