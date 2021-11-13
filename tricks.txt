@@ -66,3 +66,48 @@ config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
 options = {'enable-local-file-access': None}
 pdf = pdfkit.from_string(rendered, False, configuration=config, options=options)
 
+
+
+apache2
+https://stackoverflow.com/questions/43330231/500-internal-server-error-mod-wsgi-apache-importerror-no-module-named-django/43354916#43354916
+
+
+
+
+mod_wsgi is the cause of this error because The mod_wsgi module in C code links to the Python library. Thus the version of Python it is compiled for is embedded in the module. It doesn't just execute python program. This means it has to be compiled for the version of Python you want to use. You cannot force it via a virtual environment to use a different Python version [source].
+
+Therefore, you need to uninstall the mod_wsgi module (likely the operating system packaged one) and install mod_wsgi yourself from source code, compiling it against the Python version you want to use.
+
+Follow the steps below to fix the error:
+
+    uninstall mod_wsgi [source]:
+
+sudo rm /usr/lib/apache2/modules/mod_wsgi.so
+
+    make custom builds of Python and mod_wsgi ourselves [source]:
+
+## A.requirements:
+sudo apt update
+sudo apt install build-essential checkinstall
+sudo apt install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
+sudo apt install libffi-dev
+
+## B.build mod_wsgi:
+apt install apache2 apache2-dev
+wget https://github.com/GrahamDumpleton/mod_wsgi/archive/4.7.1.tar.gz
+tar xvfz 4.7.1.tar.gz
+cd mod_wsgi-4.7.1
+
+./configure --with-python=[your python path]
+## for example: ./configure --with-python=/usr/bin/python3.7
+
+sudo make
+sudo make install
+
+You can use which python3.7 to find the path of the Python file
+
+    reload apach2:
+
+sudo systemctl reload apache2
+
+

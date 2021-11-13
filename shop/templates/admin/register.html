@@ -7,16 +7,13 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>register</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href="{{ url_for('static', filename='css/main.css') }}">
     <script src='main.js'></script>
 </head>
 <body>
     {% block content %}
-    <div style='text-align: center;'>
-        <h2>Registration</h2>
-    </div>
     {% from "admin/_formhelper.html" import render_field %}
-        <div class="form_container">
+        <!--<div class="form_container">
             <form  method='POST', enctype="multipart/form-data">
                 <dl>
                     {{ render_field(form.name, class='form_name') }}
@@ -27,7 +24,48 @@
                 </dl>
                 <input type='submit' value='Register' class="btn">
             </form>
+
+        </div>-->
+    
+    
+        <div class="screen">
+            <form method='POST', enctype="multipart/form-data" class="formcontainer">
+                <h2>Admin Registration</h2>
+
+                <div class="inputbox">
+                    <input type="text" required="required" name="username">
+                    <span class="text">User Name</span>
+                    <span class="line"></span>
+                </div>
+    
+                <div class="inputbox">
+                    <input type="text" required="required" name="name">
+                    <span class="text">Name</span>
+                    <span class="line"></span>
+                </div>
+
+                <div class="inputbox">
+                    <input type="text" required="required" name="email">
+                    <span class="text">Email</span>
+                    <span class="line"></span>
+                </div>
+    
+                <div class="inputbox">
+                    <input type="password" required="required" name="password">
+                    <span class="text">Password</span>
+                    <span class="line"></span>
+                </div>
+    
+                <div class="inputbox">
+                    <input type="password" required="required" name="comfirm">
+                    <span class="text">Comfirm Password</span>
+                    <span class="line"></span>
+                </div>
+                <input type="submit" value="Send">
+                   
+            </form>
         </div>
-    {% endblock content %}
+    
+        {% endblock content %}
 
     

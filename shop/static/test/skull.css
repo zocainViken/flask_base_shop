@@ -1,0 +1,168 @@
+
+
+*{
+    margin: 0;
+    padding: 0;
+    /*box-sizing: border-box;*/
+}
+
+.scene{
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/*.box{
+    position: relative;
+    width: 600px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}*/
+.box{
+    position: relative;
+    width: 41%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.box h2{
+    color: black;
+    font-size: 5em;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-shadow: 0 0 10px cyan,
+                 0 0 20px cyan,
+                 0 0 40px cyan,
+                 0 0 80px cyan,
+                 0 0 120px cyan;
+                 
+}
+
+.lightsaber{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 13px;
+    height: 100%;
+    border-radius: 10px;
+    background-color: white;
+    z-index: 2;
+    box-shadow: 0 0 10px cyan,
+                 0 0 20px cyan,
+                 0 0 40px cyan,
+                 0 0 80px cyan,
+                 0 0 120px cyan;
+    
+    animation: animatelightsaber 5s linear infinite;             
+}
+@keyframes animatelightsaber{
+    0%, 3%{
+        transform: scaleY(0) translateX(0);
+    }
+    10%{
+        transform: scaleY(1) translateX(0);
+    }
+    90%{
+        transform: scaleY(1) translateX(calc(600px - 10px));
+    }
+    95%, 100%{
+        transform: scaleY(0) translateX(calc(600px - 10px));
+    }
+}
+
+
+
+
+
+
+
+.topcoat{
+    position: absolute;
+    background-color: black;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: animatetopcoat 10s linear infinite;
+}
+@keyframes animatetopcoat {
+    0%{
+        transform: translateX(0);
+    }
+    10%{
+        transform: translateX(10%);
+    }
+    20%{
+        transform: translateX(38%);
+    }
+    30%{
+        transform: translateX(65%);
+    }
+    49%{
+        transform: translateX(103%);
+    }
+    
+    51%, 52%{
+        transform: translateX(-100%);
+    }
+    55%{
+        transform: translateX(-100%);
+    }
+    95%{
+        transform: translateX(0%);
+    }
+    95%, 100%{
+        transform: translateX(0%);
+    }
+}
+
+
+
+
+
+
+/*
+        cloud animation
+*/
+/*.clouds{
+    z-index: 10;
+    bottom: 0;
+    left: 0;
+    display: inline;
+    position: absolute;
+}*/
+.clouds{
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    height: 200px;
+}
+.clouds img{
+    position: relative;
+    padding: 10px 6px;
+    min-width: 10%;
+    min-height: 500px;
+    opacity: 0.1;
+    animation: animatefog 30s linear infinite;
+}
+@keyframes animatefog{
+    0%{
+        transform: translateX(-100%);
+    }
+    100%{
+        transform: translateX(100%);
+    }
+}
+
+
+
+

@@ -66,11 +66,12 @@ def brands():
 
 
 
-@app.route('/register', methods=['GET', 'POST'] )
+@app.route('/registeradmin', methods=['GET', 'POST'] )
 def register():
     form = RegistrationForm(request.form)
     
     if request.method == 'POST':# and form.validate():
+        print(form)
         hash_password = bcrypt.generate_password_hash(form.password.data)
         print(hash_password)
         user = User(name=form.name.data,
