@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <link rel='stylesheet' type='text/css' media='screen'  href="{{ url_for('static', filename='css/main.css') }}">
+
+<body>
+    
+
+    <div class="screen_adminarea">
+        
+        {% include 'admin/navigation.html' %}
+        <!--
+        <nav id="sidebar" class="sidebar">
+            <div class="text">
+                ShopName
+            </div>
+            <ul>
+                <li><a href="#">Shop</a></li>
+                <li><a href="#">dashboard</a></li>
+                <li>
+                    <a href="#" id="product-btn" class="product-btn" onclick='productView()'>
+                        product
+                        <span id='first' class="fas fa-caret-down first"></span>
+                    </a>
+                    <ul id="product-show" class="product-show">
+                        <li><a href='#'>add product</a></li>
+                        <li><a href='#'>del product</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" id="category-btn" class="category-btn" onclick='categoryView()'>category<span id='second' class="fas fa-caret-down second"></span></a>
+                    <ul id="category-show" class="category-show">
+                        <li><a href='#'>add category</a></li>
+                        <li><a href='#'>del category</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" id="brand-btn" class="brand-btn" onclick='brandView()'>brand<span id='third' class="fas fa-caret-down third"></span></a>
+                    <ul id="brand-show" class="brand-show">
+                        <li><a href='#'>add brand</a></li>
+                        <li><a href='#'>del brand</a></li>
+                    </ul>
+                </li>
+                <li>sells</li>
+                <li>messages</li>
+                <li>income</li>
+                <li>taxes</li>
+            </ul>
+        </nav>
+        <script type="text/javascript">
+                
+            function productView(){
+                subProduct = document.getElementById('product-show');
+                subProduct.classList.toggle("show");
+                
+                first = document.getElementById('first');
+                first.classList.toggle("rotate");
+            };
+            function categoryView(){
+                subProduct = document.getElementById('category-show');
+                subProduct.classList.toggle("show");
+    
+                second = document.getElementById('second');
+                second.classList.toggle("rotate");
+            };
+            function brandView(){
+                subProduct = document.getElementById('brand-show');
+                subProduct.classList.toggle("show");
+                
+                third = document.getElementById('third');
+                third.classList.toggle("rotate");
+            };
+            function showMenu(){
+                btn = document.getElementById('btn');
+                btn.classList.toggle('click')
+    
+                menu = document.getElementById('sidebar');
+                menu.classList.toggle("show");
+            };
+        </script>
+        -->
+    
+    
+        <section id='main_screen' class="main_view" >
+            <div class="banner">
+                <h2 class="welcome_message">Bienvenue UserName, vous étes actuellement connecté à votre boutique</h2>
+            </div>
+            <div>
+                <ul>
+                    <li>nb product</li>
+                    <li>nb sell</li>
+                    <li>nd client</li>
+                    <li>income</li>
+                    <li>taxes</li>
+                    <li>best sells</li>
+                </ul>
+            </div>
+        </section>
+        <script type="text/javascript">
+                
+            function mainView(){
+                subProduct = document.getElementById('main_screen');
+                subProduct.classList.toggle("show");
+            };
+    
+        </script>
+    </div>
+
+
+</body>
+</html>

@@ -26,7 +26,7 @@ def admin():
     flash('you are logged', 'success')
     products = add_product.query.all()
 
-    return render_template('admin_area.html', title='admin page', products=products)
+    return render_template('admin/admin.html', title='admin page', products=products)
 
 
 @app.route('/adminlogin', methods=['GET', 'POST'] )
