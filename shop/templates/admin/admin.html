@@ -5,7 +5,7 @@
 <body>
     
 
-    <div class="screen_adminarea">
+    
         
         {% include 'admin/navigation.html' %}
         <!--
@@ -84,15 +84,35 @@
             <div class="banner">
                 <h2 class="welcome_message">Bienvenue UserName, vous étes actuellement connecté à votre boutique</h2>
             </div>
-            <div>
-                <ul>
-                    <li>nb product</li>
-                    <li>nb sell</li>
-                    <li>nd client</li>
-                    <li>income</li>
-                    <li>taxes</li>
-                    <li>best sells</li>
-                </ul>
+            <div class="product_container">
+                <table>
+                    <thead>
+                        <th>sr</th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Discount</th>
+                        <th>Brand</th>
+                        <th>Image</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                        <tr>
+                            <td>{{loop.index}}</td>
+                            <td>{{product.name}}</td>
+                            <td>{{product.price}}</td>
+                            <td>{{product.discount}} %</td>
+                            <td>{{product.brand.name}}</td>
+                            <td><img src="{{url_for('static', filename='images/' + product.image_1)}}", width="100", height="150"></td>
+                            <td><a href="{{url_for('updateproduct', id=product.id)}}">Edit</a></td>
+                            <td>
+                                <a href="{{url_for('deleteproduct', id=product.id)}}"> X </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </section>
         <script type="text/javascript">
@@ -103,7 +123,7 @@
             };
     
         </script>
-    </div>
+    
 
 
 </body>

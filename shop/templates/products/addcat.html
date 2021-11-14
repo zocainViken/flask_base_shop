@@ -2,17 +2,28 @@
 
 {% block content %}
 
+{% include 'admin/navigation.html' %}
+<link rel='stylesheet' type='text/css' media='screen'  href="{{ url_for('static', filename='css/main.css') }}">
 
 
-{% include 'admin/_messages.html' %}
-<div class="form_container">
-    {% from 'admin/_formhelper.html' import render_field %}
-    <form action="", method="POST">
+<section id='main_screen' class="main_view" >
+    <div class="banner">
         <h2>add new category</h2>
-        <input type="text" name="category" class="form_basic">
-        <input type="submit" value="Add category" class="add_brand_button">
-        
-    </form>
-</div>
+    </div>
+    <div class="form_container">
+        <form action="", method="POST">
+            <input type="text" name="category" class="form_basic">
+            <input type="submit" value="Add" class="add_brand_button">
+            
+        </form>
+    </div>
+</section>
+<script type="text/javascript">
+                
+    function mainView(){
+        subProduct = document.getElementById('main_screen');
+        subProduct.classList.toggle("show");
+    };
 
+</script>
 {% endblock content %}

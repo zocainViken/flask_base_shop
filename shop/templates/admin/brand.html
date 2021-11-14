@@ -8,46 +8,58 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <!--<link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src='main.js'></script>-->
-    {% include 'admin/_messages.html' %}
 </head>
 {% block content %}
 {% include 'admin/navigation.html' %}
 
-<div class="product_container">
-    <table>
-        <thead>
-            <th>sr</th>
-            <th>Name</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </thead>
-        <tbody>
-            {% if brands %}
-            {% for brand in brands %}
-            <tr>
-                <td>{{loop.index}}</td>
-                <td>{{brand.name}}</td>
-                <td><a href="{{url_for('updatebrand', id=brand.id)}}">Edit</a></td>
-                <td>
-                    <a href="{{url_for('deletebrand', id=brand.id)}}"> X </a>
-                </td>
-                
+<section id='main_screen' class="main_view" >
+    <div class="banner">
+        <h2>brands</h2>
+    </div>
+    <div class="product_container">
+        <table>
+            <thead>
+                <th>sr</th>
+                <th>Name</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </thead>
+            <tbody>
+                {% if brands %}
+                {% for brand in brands %}
+                <tr>
+                    <td>{{loop.index}}</td>
+                    <td>{{brand.name}}</td>
+                    <td><a href="{{url_for('updatebrand', id=brand.id)}}">Edit</a></td>
+                    <td>
+                        <a href="{{url_for('deletebrand', id=brand.id)}}"> X </a>
+                    </td>
+                    
 
-            </tr>
-            {% endfor %}
-            {% else %}
-            {% for cat in category %}
-            <tr>
-                <td>{{loop.index}}</td>
-                <td>{{cat.name}}</td>
-                <td><a href="{{url_for('updatecategory', id=cat.id)}}">Edit</a></td>
-                <td>
-                    <a href="{{url_for('deletecategory', id=cat.id)}}"> X </a>
-                </td>
-            </tr>
-            {% endfor %}
-            {% endif %}
-        </tbody>
-    </table>
-</div>
+                </tr>
+                {% endfor %}
+                {% else %}
+                {% for cat in category %}
+                <tr>
+                    <td>{{loop.index}}</td>
+                    <td>{{cat.name}}</td>
+                    <td><a href="{{url_for('updatecategory', id=cat.id)}}">Edit</a></td>
+                    <td>
+                        <a href="{{url_for('deletecategory', id=cat.id)}}"> X </a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</section>
+<script type="text/javascript">
+                
+    function mainView(){
+        subProduct = document.getElementById('main_screen');
+        subProduct.classList.toggle("show");
+    };
+
+</script>
 {% endblock content %}

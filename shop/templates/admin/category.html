@@ -7,44 +7,47 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <!--<link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src='main.js'></script>-->
-    {% include 'admin/_messages.html' %}
 </head>
 {% block content %}
-<div class="nav_container">
-    <nav class="admin_nav">
-        <ul class="">
-            <li><a href="/admin">administration acceuil</a></li>
-            <li><a href="/addcat">add category</a></li>
-            <li><a href="/addbrand">add brand</a></li>
-            <li><a href="/addproduct">add product</a></li>
-        </ul>
-    </nav>
-</div>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% include 'admin/navigation.html' %}
 
-<div class="product_container">
-    <table>
-        <thead>
-            <th>sr</th>
-            <th>category name</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </thead>
-        <tbody>
-            {% if category %}
-            {% for cat in category %}
-            <tr>
-                <td>{{loop.index}}</td>
-                <td>{{cat.name}}</td>
-                <td><a href="">Edit</a></td>
-                <td><a href="">Delete</a></td>
-            </tr>
-            {% endfor %}
-            {% endif %}
-        </tbody>
-    </table>
-</div>
+<section id='main_screen' class="main_view" >
+    <div class="banner">
+        <h2>categories</h2>
+    </div>
+    <div class="product_container">
+        <table>
+            <thead>
+                <th>sr</th>
+                <th>category name</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </thead>
+            <tbody>
+                {% if category %}
+                {% for cat in category %}
+                <tr>
+                    <td>{{loop.index}}</td>
+                    <td>{{cat.name}}</td>
+                    <td><a href="">Edit</a></td>
+                    <td><a href="">Delete</a></td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
 
+</section>
+<script type="text/javascript">
+                
+    function mainView(){
+        subProduct = document.getElementById('main_screen');
+        subProduct.classList.toggle("show");
+    };
 
+</script>
 
 {% endblock content %}
 

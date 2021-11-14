@@ -52,7 +52,7 @@ def category():
         return redirect(url_for('login'))
 
     category = Category.query.order_by(Category.id.desc()).all()
-    return render_template('admin/brand.html', title='category page', category=category )
+    return render_template('admin/category.html', title='category page', category=category )
 
 
 

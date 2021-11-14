@@ -5,22 +5,21 @@
 {% include 'admin/navigation.html' %}
 
 <head>
-    <title>Flask app</title>
+    <title>add product</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
   </head>
 
 
-{% include 'admin/_messages.html' %}
-
 
 
 <section id='main_screen' class="main_view" >
-    
+    <div class="banner">
+        <h2 >Add Product</h2>
+    </div>
     
     <form class="add_product" action="/addproduct" method="POST" enctype='multipart/form-data'>
     
         <div class="product_container">
-            <h2 >Add Product</h2>
             
             <div class="product_header">
                 <h3 class="">Product name:</h3>
