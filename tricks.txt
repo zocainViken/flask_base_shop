@@ -11,6 +11,8 @@ flask flash
 https://flask.palletsprojects.com/en/2.0.x/patterns/flashing/
 Flashing With Categories
 
+
+
 python -m pip install flask-uploads
 https://stackoverflow.com/questions/61628503/flask-uploads-importerror-cannot-import-name-secure-filename
 C:\Users\cozia\AppData\Local\Programs\Python\Python38\Lib\site-packages
@@ -19,6 +21,11 @@ this:
 to:
 	from werkzeug.utils import secure_filename
 	from werkzeug.datastructures import  FileStorage
+##############################
+I need to find a way for aboving this situation, for now i have use the command line python -m pip freeze > requirements.txt  but I have some doubt about this way but now i know how i can make requirements easily thanks nico
+##############################
+
+
 
 python -m pip install flask-msearch
 # for searchbar and find product
