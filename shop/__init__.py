@@ -20,7 +20,9 @@ CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///myshop.db'
 app.config['SECRET_KEY'] = 'my_super_secret_key'
 
-UPLOAD_FOLDER = f'{basedir}\\static\\images'
+#UPLOAD_FOLDER = f'{basedir}\\static\\images'# windows
+UPLOAD_FOLDER = f'{basedir}/static/images'# windows
+
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 photos = UploadSet('photos', IMAGES)

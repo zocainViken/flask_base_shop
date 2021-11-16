@@ -1,0 +1,27 @@
+<VirtualHost *:80>
+        
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html
+
+	###########################################################
+	#	FLASK APP
+	#https://asdkazmi.medium.com/deploying-flask-app-with-wsgi-and-apache-server-on-ubuntu-20-04-396607e0e40f
+
+	WSGIDaemonProcess flaskapp threads=5
+        WSGIScriptAlias / /var/www/html/flaskapp/flaskapp.wsgi
+        WSGIApplicationGroup %{GLOBAL}# useful when we have __init__.py
+
+        <Directory flaskapp>
+             WSGIProcessGroup flaskapp
+             WSGIApplicationGroup %{GLOBAL}
+             Order deny,allow
+             Allow from all 
+        </Directory>
+
+	##########################################################
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined        # For most configuration files from conf-available/, whic...
+        
+         Header set Access-Control-Allow-Origin "*"
+</VirtualHost>

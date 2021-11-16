@@ -1,5 +1,4 @@
 
-
 *{
     margin: 0;
     padding: 0;
@@ -26,15 +25,17 @@
 }*/
 .box{
     position: relative;
-    width: 41%;
-    height: 300px;
+    width: 100%;
+    height: 250px;
     display: flex;
     align-items: center;
     text-align: center;
+    justify-content: center;
+    /*! top: -7%; */
 }
 .box h2{
     color: black;
-    font-size: 5em;
+    font-size: 4em;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-shadow: 0 0 10px cyan,
@@ -44,7 +45,7 @@
                  0 0 120px cyan;
                  
 }
-
+/*
 .lightsaber{
     position: absolute;
     top: 0;
@@ -60,8 +61,8 @@
                  0 0 80px cyan,
                  0 0 120px cyan;
     
-    animation: animatelightsaber 5s linear infinite;             
-}
+    animation: animatelightsaber 5s linear infinite;          
+}*/
 @keyframes animatelightsaber{
     0%, 3%{
         transform: scaleY(0) translateX(0);
@@ -70,15 +71,40 @@
         transform: scaleY(1) translateX(0);
     }
     90%{
-        transform: scaleY(1) translateX(calc(600px - 10px));
+        transform: scaleY(1) translateX(calc(100% - 10px));
     }
     95%, 100%{
-        transform: scaleY(0) translateX(calc(600px - 10px));
+        transform: scaleY(0) translateX(calc(100% - 10px));
     }
 }
 
 
+.lightsaber{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 13px;
+    height: 100%;
+    border-radius: 10px;
+    background-color: white;
+    z-index: 2;
+    box-shadow: 0 0 10px cyan,
+                 0 0 20px cyan,
+                 0 0 40px cyan,
+                 0 0 80px cyan,
+                 0 0 120px cyan;
+    
+    animation: animatelightsaber 5s linear infinite;            
+}
 
+.start{
+    width: 49%;
+}
+.end{
+    width: 49%;
+    display: flex;
+    justify-content: end;
+}
 
 
 
@@ -88,9 +114,11 @@
     background-color: black;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 113%;
     height: 100%;
     animation: animatetopcoat 10s linear infinite;
+
+    display: flex;
 }
 @keyframes animatetopcoat {
     0%{
@@ -120,6 +148,8 @@
     }
     95%, 100%{
         transform: translateX(0%);
+        transform: translateY(0%);
+        bottom: 0;
     }
 }
 
@@ -139,20 +169,19 @@
     position: absolute;
 }*/
 .clouds{
-    bottom: 0;
-    left: 0;
     display: flex;
     flex-direction: row;
-    position: relative;
-    height: 200px;
+    position: fixed;
+    height: 100%;
 }
 .clouds img{
     position: relative;
+    bottom: -3%;
     padding: 10px 6px;
-    min-width: 10%;
-    min-height: 500px;
+    /*min-width: 10%;*/
+    min-height: 80%;
     opacity: 0.1;
-    animation: animatefog 30s linear infinite;
+    animation: animatefog 60s linear infinite;
 }
 @keyframes animatefog{
     0%{
@@ -170,5 +199,7 @@
     color: cyan;
     width: 100%;
     text-align: center;
-    font-size: 36px;
+    font-size: 26px;
+    bottom: 3%;
+    position: absolute;
 }
