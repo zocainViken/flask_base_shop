@@ -141,6 +141,106 @@ body{
 #####################################################################################
 #####################################################################################
 */
+/*
+.product_test_grid{
+    border: 2px solid white;
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    
+    display: grid;
+    grid-gap: 26px;
+    grid-template-columns:repeat(auto-fit, minmax(400px, 2fr));
+    grid-auto-rows: repeat(auto-fit, minmax(400px, 2fr));
+    align-items: center;
+    justify-items: center;
+    margin-bottom: 33px;
+}
+.tuto_card{
+    border: 2px solid cyan;
+    max-width: 80%;
+    min-width: 60%;
+}
 .product_test_grid img{
     width:  300px;
 }
+.tuto_image_container{
+    display: flex;
+    justify-content: center;
+    background: rgba(0, 140, 255, 0.1);
+}
+.tuto_image{
+    transform: rotate(78deg);
+
+}
+*/
+/*
+####################################################################################
+*/
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 100vh;
+    border: darkblue;
+    flex-wrap: wrap;
+}
+.card{
+    position: relative;
+    width: 300px;
+    height: 200px;
+}
+.face{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: 0.5s;
+}
+.face1{
+    background: rgba(0, 140, 255, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    transform-origin: bottom;
+}
+.face1 h3{
+    margin: 10px 0 0;
+    color: white;
+    text-align: center;
+    font-size: 1.5em;
+}
+.card_image{
+    /*width: 310px;
+    height: 200px;*/
+    max-width: 100px;
+    transform: rotate(78deg);
+}
+.card:hover .face1{
+    transform: translateY(-100%) rotateX(90deg);
+    background: cyan;
+}
+.face2{
+    background: rgba(0, 140, 255, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-origin: top;
+    transform: translateY(100%) rotateX(90deg);
+}
+.card:hover .face2{
+    transform: translateY(0%) rotateX(0deg);
+}
+
+
+
+
+
+
+
+
+
+
