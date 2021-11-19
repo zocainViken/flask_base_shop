@@ -17,19 +17,31 @@
 .shop_btn{
     width: 50px;
     height: 50px;
-    border: 2px solid white;
+    border: 2px solid cyan;
+    border-radius: 50%;
     color: cyan;
     z-index: 105;
+    display: flex;
+    align-items: center;
+    transition: 0.5s;
+    position: absolute;
+    top: 16%;
 }
-
-/*.box{
-    position: relative;
-    width: 600px;
-    height: 300px;
+.shop_btn a{
     display: flex;
     justify-content: center;
-    align-items: center;
-}*/
+}
+.shop_btn:hover{
+    background-color: #03e9f4;
+    color: black;
+    border: 2px solid green;
+    box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4, 0 0 200px #03e9f4;
+    top: 15%;
+}
+.shop_icon{
+    width: 80%;
+}
+
 .box{
     position: relative;
     width: 100%;
@@ -38,7 +50,6 @@
     align-items: center;
     text-align: center;
     justify-content: center;
-    /*! top: -7%; */
 }
 .box h2{
     color: black;
@@ -52,36 +63,19 @@
                  0 0 120px cyan;
                  
 }
-/*
-.lightsaber{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 13px;
-    height: 100%;
-    border-radius: 10px;
-    background-color: white;
-    z-index: 2;
-    box-shadow: 0 0 10px cyan,
-                 0 0 20px cyan,
-                 0 0 40px cyan,
-                 0 0 80px cyan,
-                 0 0 120px cyan;
-    
-    animation: animatelightsaber 5s linear infinite;          
-}*/
+
 @keyframes animatelightsaber{
     0%, 3%{
-        transform: scaleY(0) translateX(0);
+        transform: scaleY(0);
     }
     10%{
-        transform: scaleY(1) translateX(0);
+        transform: scaleY(1);
     }
     90%{
-        transform: scaleY(1) translateX(calc(100% - 10px));
+        transform: scaleY(1);
     }
     95%, 100%{
-        transform: scaleY(0) translateX(calc(100% - 10px));
+        transform: scaleY(0);
     }
 }
 
@@ -108,7 +102,7 @@
     width: 49%;
 }
 .end{
-    width: 49%;
+    width: 53%;
     display: flex;
     justify-content: end;
 }
@@ -168,13 +162,6 @@
 /*
         cloud animation
 */
-/*.clouds{
-    z-index: 10;
-    bottom: 0;
-    left: 0;
-    display: inline;
-    position: absolute;
-}*/
 .clouds{
     display: flex;
     flex-direction: row;
@@ -199,6 +186,34 @@
     }
 }
 
+
+
+
+clouds{
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    height: 100%;
+    z-index: -1;
+    top: 0;
+    opacity: 0.1;
+}
+.clouds img{
+    position: relative;
+    bottom: -3%;
+    padding: 10px 6px;
+    /*min-width: 10%;*/
+    min-height: 80%;
+    animation: animatefog 60s linear infinite;
+}
+@keyframes animatefog{
+    0%{
+        transform: translateX(-100%);
+    }
+    100%{
+        transform: translateX(10%);
+    }
+}
 
 
 

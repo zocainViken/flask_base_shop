@@ -16,16 +16,7 @@ from shop.admin.models import User
 import pdfkit
 from flask_wtf import FlaskForm
 
-'''
-paypal
-sandbox
 
-client_id = ASYRiJgsKyBmBMkgIibuXSTZl7BfYy73n_cUPWwrVBRYkskHe8oB1vf92T9Av4f06Na0SsA9YMqaEd_u
-secret_key = EHSLv93scqM3SEv4GNXask4pQeb9fpUvPZgzny6sBcE_4hkUjfLO1_amvgLPhirXKHx40W1YXveXbgU-
-
-
-
-'''
 
 
 @app.route('/customer/register', methods=['GET', 'POST'])

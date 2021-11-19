@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+    {% block content %}
+    {% include 'head.html' %}
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +10,7 @@
     <title>MonoProduct</title>
 </head>
 <body>
-    <div class="menu"></div>
+    {% include 'navigation.html' %}
 
     <section class="screen">
         <div id="silver_container" class="product_container hidden silver">
@@ -42,9 +44,8 @@
         </div>
 
         <div class="add_cart">
-            add cart
             <div class="image_container_add">
-                <img id="checkout_icon" src="{{ url_for('static', filename='css/css_images/check-out.png') }}" alt="">
+                <img id="checkout_icon" src="{{ url_for('static', filename='css/css_images/check-outb.png') }}" alt="">
             </div>
         </div>
     </section>
@@ -211,4 +212,5 @@
     </script>
     <footer></footer>
 </body>
+{% endblock content %}
 </html>

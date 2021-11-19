@@ -36,7 +36,9 @@ def home():
 
 @app.route('/monoproduct', methods = ['GET', 'POST'])
 def mono_product():
-    return render_template('products/monoproduct.html', title='product page')
+    page = request.args.get('page', 1, type=int)
+    products = add_product.query.filter(add_product.stock > 0).paginate(page=page, per_page=5)
+    return render_template('products/monoproduct.html', title='product page', products=products)
 
 @app.route('/result')
 def result():
