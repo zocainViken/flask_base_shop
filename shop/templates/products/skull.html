@@ -9,8 +9,11 @@
     <link rel='stylesheet' type='text/css' media='screen'  href="{{ url_for('static', filename='css/skull.css') }}">
 </head>
 <body>
-    <nav class="shop_btn"></nav>
+    
     <div class="scene">
+        <div class="shop_btn">
+        <a href="/monoproduct">bouton</a>
+        </div>
         <div class="box">
             <!--<div class="lightsaber"></div>-->
             <div class="topcoat">
@@ -33,6 +36,9 @@
             <img src="{{ url_for('static', filename='css/css_images/cloud5.png') }}" alt="animation cloud image 1" style="--i:5;">
 
         </div>
+        <!--<p class="client_warning_message">
+            Site on Progress... <br>sorry for the covenience
+        </p>-->
         <p class="client_warning_message">
             Site en construction... <br>Veuillez nous excuser pour la gêne occasionnée
         </p>

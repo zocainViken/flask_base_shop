@@ -14,6 +14,13 @@
     min-height: 100vh;
     overflow: hidden;
 }
+.shop_btn{
+    width: 50px;
+    height: 50px;
+    border: 2px solid white;
+    color: cyan;
+    z-index: 105;
+}
 
 /*.box{
     position: relative;

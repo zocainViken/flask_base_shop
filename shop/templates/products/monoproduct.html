@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="monoproduct.css">
+    <link rel='stylesheet' type='text/css' media='screen'  href="{{ url_for('static', filename='css/monoproduct.css') }}">
     <title>MonoProduct</title>
 </head>
 <body>
@@ -17,7 +17,7 @@
             </div>
 
             <div class="product_image">
-                <img src="silver..png" alt="silver watch skull watch brand" class="product">
+                <img src="{{ url_for('static', filename='css/css_images/silver..png') }}" alt="silver watch skull watch brand" class="product">
             </div>
         </div>
 
@@ -27,7 +27,7 @@
             </div>
 
             <div class="product_image">
-                <img src="black.png" alt="black watch skull watch brand" class="product">
+                <img src="{{ url_for('static', filename='css/css_images/black.png') }}" alt="black watch skull watch brand" class="product">
             </div>
         </div>
 
@@ -44,14 +44,14 @@
         <div class="add_cart">
             add cart
             <div class="image_container_add">
-                <img id="checkout_icon" src="check-out.png" alt="">
+                <img id="checkout_icon" src="{{ url_for('static', filename='css/css_images/check-out.png') }}" alt="">
             </div>
         </div>
     </section>
 
     <section class="product_description_screen">
         <div class="product_description_image">
-            <img src="black.png" alt="black watch skull watch brand" class="product">
+            <img src="{{ url_for('static', filename='css/css_images/black.png') }}" alt="black watch skull watch brand" class="product">
         </div>
         <div class="product_description_text">
             - Tips: 2 sides buttons is just for decoration <br> no function for this two button <br>
@@ -65,50 +65,7 @@
             - stainless steel metal folding buckle <br>
         </div>
     </section>
-
-    <!--<section class="product_test_grid">
-        
-        <div class="tuto_card">
-            <div class="tuto_image_container">
-                <img src="black_tuto.png" alt="" class="tuto_image">
-            </div>
-            <div class="tuto_text">
-                1: Pull out the crown <br>
-                2: Screw the stem anti-clockwise to your local time 
-            </div>
-        </div>
-
-        <div class="tuto_card">
-            <div class="tuto_image_container">
-                <img src="black_tuto.png" alt="" class="tuto_image">
-            </div>
-            <div class="tuto_text">
-                3: Push the crown back to the original place <br>
-                4: The watch can't work when the spring is loose
-            </div>
-        </div>
-
-        <div class="tuto_card">
-            <div class="tuto_image_container">
-                <img src="black_tuto.png" alt="" class="tuto_image">
-            </div>
-            <div class="tuto_text">
-                5: Turn the stem clockwise 10~15 turns <br>
-                6: Stop winding if the spring is full otherwise the watch will be broken
-            </div>
-        </div> 
-
-        <div class="tuto_card">
-            <div class="tuto_image_container">
-                <img src="black_tuto.png" alt="" class="tuto_image">
-            </div>
-            <div class="tuto_text">
-                7: Please wind up your watch before wearing and to keep your wath <br>
-                8: the photo's spring situation is full
-            </div>
-        </div>       
-    </section>-->
-
+    
 
     <!--https://www.youtube.com/watch?v=60v3PKVjM2Q-->
     <section class="container">
@@ -116,7 +73,7 @@
         <div class="card">
             <div class="face face1">
                 <div class="content">
-                    <img src="black_tuto.png" alt="" class="card_image">
+                    <img src="{{ url_for('static', filename='css/css_images/black_tuto.png') }}"  alt="" class="card_image">
                     <h2>Step 1</h2>
                 </div>
             </div>
@@ -134,7 +91,7 @@
         <div class="card">
             <div class="face face1">
                 <div class="content">
-                    <img src="black_tuto.png" alt="" class="card_image">
+                    <img src="{{ url_for('static', filename='css/css_images/black_tuto.png') }}" alt="" class="card_image">
                     <h2>Step 2</h2>
                 </div>
             </div>
@@ -152,7 +109,7 @@
         <div class="card">
             <div class="face face1">
                 <div class="content">
-                    <img src="black_tuto.png" alt="" class="card_image">
+                    <img src="{{ url_for('static', filename='css/css_images/black_tuto.png') }}"  alt="" class="card_image">
                     <h2>Step 3</h2>
                 </div>
             </div>
@@ -170,7 +127,7 @@
         <div class="card">
             <div class="face face1">
                 <div class="content">
-                    <img src="black_tuto.png" alt="" class="card_image">
+                    <img src="{{ url_for('static', filename='css/css_images/black_tuto.png') }}" alt="" class="card_image">
                     <h2>Step 4</h2>
                 </div>
             </div>
@@ -189,11 +146,11 @@
     
     <!--<img src="testingwatch.jpg" alt="">-->
     <div id="clouds">
-        <img src="cloud1.png" alt="animation cloud image 1" style="--i:1;">
-        <img src="cloud2.png" alt="animation cloud image 1" style="--i:2;">
-        <img src="cloud3.png" alt="animation cloud image 1" style="--i:3;">
-        <img src="cloud4.png" alt="animation cloud image 1" style="--i:4;">
-        <img src="cloud5.png" alt="animation cloud image 1" style="--i:5;">
+        <img src="{{ url_for('static', filename='css/css_images/cloud1.png') }}" alt="animation cloud image 1" style="--i:1;">
+        <img src="{{ url_for('static', filename='css/css_images/cloud2.png') }}" alt="animation cloud image 1" style="--i:2;">
+        <img src="{{ url_for('static', filename='css/css_images/cloud3.png') }}" alt="animation cloud image 1" style="--i:3;">
+        <img src="{{ url_for('static', filename='css/css_images/cloud4.png') }}" alt="animation cloud image 1" style="--i:4;">
+        <img src="{{ url_for('static', filename='css/css_images/cloud5.png') }}" alt="animation cloud image 1" style="--i:5;">
 
     </div>
     <script>

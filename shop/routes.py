@@ -33,6 +33,11 @@ def home():
     #return render_template('products/index.html', title='home page', products=products, brands=brands(), categories=categories())
     return render_template('products/skull.html', title='home page')
 
+
+@app.route('/monoproduct', methods = ['GET', 'POST'])
+def mono_product():
+    return render_template('products/monoproduct.html', title='product page')
+
 @app.route('/result')
 def result():
     searchword = request.args.get('q')
