@@ -4,10 +4,9 @@
 <body>
     
     {% from "admin/_formhelper.html" import render_field %}
-    {% include 'admin/_messages.html' %}
     {% include 'navigation.html' %}
     {% block content %}
-    <div style='text-align: center;'>
+    <!--<div style='text-align: center;'>
         <h2>Register</h2>
     </div>
     <form  method='POST', enctype="multipart/form-data">
@@ -29,7 +28,81 @@
             {{ render_field(form.zipcode) }}
             {{ form.submit() }}
         </dl>
-    </form>
+    </form>-->
+    <div class="screen">
+        <form method='POST', enctype="multipart/form-data" class="formcontainer">
+            <h2>User Registration</h2>
+            {{ form.csrf_token }}
+
+            <div class="inputbox">
+                <input type="text" required="required" name="username">
+                <span class="text">First Name</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="name">
+                <span class="text">Name</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="email">
+                <span class="text">Email</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="password" required="required" name="password">
+                <span class="text">Password</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="password" required="required" name="comfirm">
+                <span class="text">Comfirm Password</span>
+                <span class="line"></span>
+            </div>
+
+
+            <div class="inputbox">
+                <input type="text" required="required" name="country">
+                <span class="text">Country</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="state">
+                <span class="text">state</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="city">
+                <span class="text">City</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="" name="contact">
+                <span class="text">Contact Phone</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="adress">
+                <span class="text">Adress</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="zipcode">
+                <span class="text">Zipcode</span>
+                <span class="line"></span>
+            </div>
+            <input type="submit" value="Send">               
+        </form>
+    </div>
     
     {% endblock content %}
 

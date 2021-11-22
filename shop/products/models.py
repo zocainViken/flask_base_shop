@@ -11,7 +11,6 @@ class add_img(db.Model):
     name = db.Column(db.String(30), unique=False, nullable=False)
     path = db.Column(db.String(255), unique=False, nullable=False)
 
-
 class add_product(db.Model):
     __searchbale__ = ['name', 'description']
     id = db.Column(db.Integer, primary_key=True)
@@ -19,7 +18,10 @@ class add_product(db.Model):
     price = db.Column(db.Numeric(1000, 2), nullable=False)
     discount = db.Column(db.Integer, nullable=False)
     stock = db.Column(db.Integer, nullable=False)
-    colors = db.Column(db.Text, nullable=False)
+    
+    colors_id = db.Column(db.Integer, db.ForeignKey('color.id'), nullable=False)
+    color = db.relationship('Color', backref=db.backref('col', lazy=True))
+
     description = db.Column(db.Text, nullable=False)
 
     pub_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
@@ -38,6 +40,10 @@ class add_product(db.Model):
     def __repr__(self):
         return '<addproduct %r>' % self.name
 
+
+class Color(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name_color = db.Column(db.String(80), nullable=False)
 
 
 class Brand(db.Model):

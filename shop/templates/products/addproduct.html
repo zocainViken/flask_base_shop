@@ -29,8 +29,12 @@
                 <h3 class="">Product description:</h3>
                 <input type="textarea" name="description" value="add description" >
     
-                <h3 class="">Product colors:</h3>
-                <input type="text" name="color" value="add color" >
+                <select name="color_name" class="form">
+                    <option value="" class="">select a color</option>
+                    {% for color in colors %}
+                    <option value="{{color.id}}" class="">{{color.name_color}}</option>
+                    {% endfor %}
+                </select>
                 
                 <select name="brand" class="form">
                     <option value="" class="">select a brand</option>

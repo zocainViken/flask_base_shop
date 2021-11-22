@@ -8,15 +8,25 @@
         <h2>Login</h2>
     </div>
     {% from "admin/_formhelper.html" import render_field %}
-        <div class="form_container">
-            {% include 'admin/_messages.html' %}
-            <form  method='POST', enctype="multipart/form-data">
+        
+        <div class="screen">
+            <form method='POST', enctype="multipart/form-data" class="formcontainer">
+                <h2>User Login</h2>
                 {{ form.csrf_token }}
-                <dl>
-                    {{ render_field(form.username) }}
-                    {{ render_field(form.password) }}
-                </dl>
-                <input type='submit' value='Login' class="btn">
+    
+                <div class="inputbox">
+                    <input type="text" required="required" name="username">
+                    <span class="text">First Name</span>
+                    <span class="line"></span>
+                </div>
+    
+                <div class="inputbox">
+                    <input type="password" required="required" name="password">
+                    <span class="text">Password</span>
+                    <span class="line"></span>
+                </div>
+                
+                <input type="submit" value="Send">               
             </form>
         </div>
     {% endblock content %}

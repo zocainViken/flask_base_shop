@@ -30,17 +30,21 @@
                 <input type="textarea" name="description" value="{{updateproduct.description}}" >
 
                 <h3 class="">Product colors:</h3>
-                <input type="text" name="color" value="{{updateproduct.color}}" >
+                <select name="color" class="form">
+                    {% for color in colors %}
+                    <option selected='{{color.id}}'  value="{{color.name_color}}" class="">{{color.name_color}}</option>
+                    {% endfor %}
+                </select>
                 
                 <select name="brand" class="form">
                     {% for brand in brands %}
-                    <option selected='{{brand.name}}'  value="{{brand.id}}" class="">{{brand.name}}</option>
+                    <option selected='{{brand.id}}'  value="{{brand.name}}" class="">{{brand.name}}</option>
                     {% endfor %}
                 </select>
 
                 <select name="category" class="form">
                     {% for category in categories %}
-                    <option value="{{category.id}}" class="">{{category.name}}</option>
+                    <option value="{{category.name}}" selected='{{category.id}}' class="">{{category.name}}</option>
                     
                     {% endfor %}
                 </select>

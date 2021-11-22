@@ -84,29 +84,35 @@
             <div class="banner">
                 <h2 class="welcome_message">Bienvenue UserName, vous étes actuellement connecté à votre boutique</h2>
             </div>
-            <div class="product_container">
-                <table>
+            <div class="product_array">
+                <table class="responsive-array">
                     <thead>
-                        <th>sr</th>
-                        <th>Product</th>
-                        <th>Price</th>
-                        <th>Discount</th>
-                        <th>Brand</th>
-                        <th>Image</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <tr>
+                            <th>sr</th>
+                            <th>Product</th>
+                            <th>Brand</th>
+                            <th>Category</th>
+                            <th>Color</th>
+                            <th>Price</th>
+                            <th>Discount</th>
+                            <th>Image</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
                     </thead>
                     <tbody>
                         {% for product in products %}
                         <tr>
-                            <td>{{loop.index}}</td>
-                            <td>{{product.name}}</td>
-                            <td>{{product.price}}</td>
-                            <td>{{product.discount}} %</td>
-                            <td>{{product.brand.name}}</td>
-                            <td><img src="{{url_for('static', filename='images/' + product.image_1)}}", width="100", height="150"></td>
-                            <td><a href="{{url_for('updateproduct', id=product.id)}}">Edit</a></td>
-                            <td>
+                            <td data-label="Index">{{loop.index}}</td>
+                            <td data-label="Name">{{product.name}}</td>
+                            <td data-label="Brand">{{product.brand.name}}</td>
+                            <td data-label="Categpry">{{product.category.name}}</td>
+                            <td data-label="Color">{{product.color.name_color}}</td>
+                            <td data-label="Price">{{product.price}}</td>
+                            <td data-label="Discount">{{product.discount}} %</td>
+                            <td data-label="Image" class="img_container"><img src="{{url_for('static', filename='images/' + product.image_1)}}", width="100", height="150"></td>
+                            <td data-label="Edit"><a href="{{url_for('updateproduct', id=product.id)}}">Edit</a></td>
+                            <td data-label="Delete">
                                 <a href="{{url_for('deleteproduct', id=product.id)}}"> X </a>
                             </td>
                         </tr>

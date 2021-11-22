@@ -19,7 +19,11 @@ p{
 }
 
 /*
-        ADMIN REGISTRATION
+#############################################################################
+#############################################################################
+            ADMIN REGISTRATION
+#############################################################################
+#############################################################################
 */
 
 .screen{
@@ -117,8 +121,89 @@ input[type="submit"]{
 
 
 /*
-        ADMIN AREA
+#############################################################################
+#############################################################################
+            ADMIN AREA
+#############################################################################
+#############################################################################
 */
+.product_array{
+    box-sizing: border-box;
+    display: inline;
+    position: relative;
+    top: 39px;
+}
+.product_array table{
+    width: 100%;
+    border-collapse: collapse;
+}
+.product_array table th, .product_array table td{
+    text-align: left;
+    border: solid 1px darkblue;
+    color: cyan;
+    min-height: 50px;
+}
+.product_array table th{
+    background-color: #3e3d3d;
+    color: cyan;
+}
+.img_container{
+    background-color: #1c1c1c;
+    display: flex;
+    justify-content: center;
+}
+td img{
+    transform: rotate(74deg);
+    width: 145px;
+}
+tr:nth-child(odd){
+    background-color: #252525;
+}
+/*
+    Mobile adaption for the product array 
+*/
+@media only screen and (max-width: 870px){
+    table, thead, tbody, tr, th, td{
+        display: block;
+    }
+    thead{
+        display: none;
+    }
+    
+    tr{
+        border-bottom: 66px solid black;
+    }
+    td{
+        padding-left: 170px;
+        position: relative;
+        
+        display: flex;
+        align-items: center;
+    }
+    
+    td:nth-child(odd){
+        background-color: #252525;
+    }
+    td::before{
+        padding: 13px;
+        content: attr(data-label);
+        position: absolute;
+        width: 150px;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        color: orange;
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+    }
+    .sidebar.show{
+        z-index: 5;
+        width: 100%;
+        position: fixed;
+        top: 0;
+    }
+}
 
 
 .screen_adminarea{
@@ -129,18 +214,11 @@ input[type="submit"]{
 section#main_screen{
     width: 80%;
     left: 10%;
-    min-height: 320px;
-    height: 76vh;
-    margin-top: 26px;
+    min-height: 70vh;
     background-color: #1e1e1e;
     box-shadow: 0px 5px cyan;
     position: relative;
     transition: 0.9s ease;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 section#main_screen.show{
     left: 22%;
@@ -153,8 +231,7 @@ div.banner{
     text-align: center;
     background-color: #1e1e1e;
     box-shadow: 0px 5px cyan;
-
-    position: absolute;
+    position: relative;
     top: 0;
 }
 
@@ -188,16 +265,16 @@ div.banner{
     content : '\f00d';
 }
 .sidebar{
-    position: fixed;
+    position: absolute;
     width: 17%;
     height: 100%;
-    left: 0;
     background-color: #1b1b1b;
-    transition: 0.6s ease;
-    left: -22%;
+    transition: 0.9s ease;
+    left: -66%;
 }
 .sidebar.show{
     left: 0px;
+    top: 0;
     border-right: 3px solid black;
 }
 .sidebar .text{
@@ -210,7 +287,6 @@ div.banner{
     letter-spacing: 2px;
 }
 nav ul{
-    height: 100%;
     width: 65%;
     list-style: none;
 }
@@ -318,7 +394,13 @@ nav ul li a span.rotate{
 }
 
 
-
+/*
+#############################################################################
+#############################################################################
+            HOME PAGE
+#############################################################################
+#############################################################################
+*/
 
 .nav nav ul{
     display: flex;
@@ -382,7 +464,13 @@ span.left{
 
 
 
-
+/*
+#############################################################################
+#############################################################################
+            SINGLE PAGE PRODUCT
+#############################################################################
+#############################################################################
+*/
 
 
 .single_product_container{
@@ -424,16 +512,14 @@ span.single_btn_add_cart a:hover{
     background-color: #070d5d;
     box-shadow: 6px 6px darkturquoise;
 }
-.single_product_corpus{
-}
 #single_image_screen{
     width: 60%;
     min-width: 320px;
-}
-.single_product_card_footer{
 }
 .product_container .product_card_footer span.right{
     position: absolute;
     right: 0;
     top: -30px;
 }
+
+

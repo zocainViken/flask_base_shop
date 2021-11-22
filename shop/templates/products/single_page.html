@@ -48,10 +48,10 @@
                     <button type="submit">add cart</button>
                     <label for="">Quantity:</label>
                     <input type="number" name="quantity" id="" value=1 min=1 max={{products.stock}}>
-                    {% set colors = products.colors.split(',') %}
+                    
                     <label for="">colors</label>
                     <select name="colors" id="">
-                        {% for color in colors %}
+                        {% for color in color %}
                         {% set col = color.split(':') %}
                         <option value="{{col[0]}}">
                             {{col[0]|capitalize}}

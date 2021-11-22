@@ -1,0 +1,37 @@
+
+
+{% block content %}
+
+{% include 'admin/navigation.html' %}
+
+<head>
+    <title>add product</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  </head>
+
+
+
+
+<section id='main_screen' class="main_view" >
+    <div class="banner">
+        <h2 >Add color</h2>
+    </div>
+    
+    <form action="/addcolor" method="POST" enctype='multipart/form-data'>
+    
+      
+        <input type="text" name="name_color" value="add color" >
+        <input type="submit" value="Add " class="add_button">   
+    </form>
+    
+</section>
+<script type="text/javascript">
+                
+    function mainView(){
+        subProduct = document.getElementById('main_screen');
+        subProduct.classList.toggle("show");
+    };
+
+</script>
+
+{% endblock content %}

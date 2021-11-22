@@ -5,7 +5,7 @@ from shop.admin.routes import admin
 from flask import redirect, render_template, url_for, flash, request, session
 from werkzeug.utils import secure_filename
 from shop import db, app, photos
-from .models import Brand, Category, add_img, add_product
+from .models import Brand, Category, Color, add_img, add_product
 from .forms import Addproducts
 #from shop.products.models import addproducts
 
@@ -115,8 +115,10 @@ def upload():
         flash('please loggin first', 'danger')
         return redirect(url_for('login'))
 
+    # DB fetching for html selector
     brands = Brand.query.all()
     category = Category.query.all()
+    colors = Color.query.all()
     form = Addproducts(request.form)
     images = []# nom des images que je veux associer
     if request.method == 'POST':
@@ -133,49 +135,49 @@ def upload():
                 adding = add_img(name=file.filename, product_name=product_name, path= path)
                 db.session.add(adding)
                 db.session.commit()
-        #print(form.name.data)
+
 
         name = form.name.data
         price = form.price.data
         discount = form.discount.data
         stock = form.stock.data
-        colors = form.colors.data
-        colors = request.form.get('color')
+        colors = request.form.get('color_name')
         description = form.description.data
 
         brand = request.form.get('brand')
         category = request.form.get('category')
         #print(f'\n\nfile:\t', brand, '\n\n\n')
         # if file and allowed_file(file.filename): 
-        image_1 = request.files.get('image_1')
-        image_1_name = secure_filename(image_1.filename)
-        image_1.save(os.path.join(app.config ['UPLOAD_FOLDER'], image_1_name))
+        try:
+            image_1 = request.files.get('image_1')
+            image_1_name = secure_filename(image_1.filename)
+            image_1.save(os.path.join(app.config ['UPLOAD_FOLDER'], image_1_name))
 
-        image_2 = request.files.get('image_2')
-        image_2_name = secure_filename(image_2.filename)
-        image_2.save(os.path.join(app.config ['UPLOAD_FOLDER'], image_2_name))
+            image_2 = request.files.get('image_2')
+            image_2_name = secure_filename(image_2.filename)
+            image_2.save(os.path.join(app.config ['UPLOAD_FOLDER'], image_2_name))
 
-        image_3 = request.files.get('image_3')
-        image_3_name = secure_filename(image_3.filename)
-        image_3.save(os.path.join(app.config ['UPLOAD_FOLDER'], image_3_name))
-
+            image_3 = request.files.get('image_3')
+            image_3_name = secure_filename(image_3.filename)
+            image_3.save(os.path.join(app.config ['UPLOAD_FOLDER'], image_3_name))
+        except FileNotFoundError:
+            print("no picture into form")
+            
+            image_1_name, image_2_name, image_3_name = 'NaN'
+            # that work but all or nothing
+            
         #print(f'\n\nfile:\t', files.filename, '\n\n\n')
         adding = add_product(name=name, price=price, discount=discount,
-                             stock=stock, colors=colors, description=description,
+                             stock=stock, colors_id=colors, description=description,
                              brand_id=brand, category_id=category, image_1=image_1_name,
                              image_2=image_2_name, image_3=image_3_name)
         db.session.add(adding)
         db.session.commit()
         flash(f'the product {name} was successfuly added to your database', 'success')
         
-
-        
-
-
-        
         return render_template('products/addproduct.html')
 
-    return render_template('products/addproduct.html', title='add product page',brands=brands,categories=category)# form=form,  categories=category)
+    return render_template('products/addproduct.html', title='add product page',brands=brands,categories=category, colors=colors)# form=form,  categories=category)
 
 @app.route('/updateproduct/<int:id>', methods=['GET', 'POST'])
 def updateproduct(id):
@@ -186,19 +188,15 @@ def updateproduct(id):
     #print(f'\n\nid:\t', id, '\n\n\n') 
     brands = Brand.query.all()
     categories = Category.query.all()
+    colors = Color.query.all()
+    
     updateproduct = add_product.query.get_or_404(id)
     form = Addproducts(request.form)
 
     name = request.form.get('name') 
-    color = request.form.get('color') 
-    price = request.form.get('price') 
-    discount = request.form.get('discount')
-    stock = request.form.get('stock')
-    brand = request.form.get('brand')
-    category = request.form.get('category')
-
     if request.method == 'POST':
-        updateproduct.colors = form.colors.data
+        updateproduct.colors = request.form.get('color')
+        print(request.form.get('color'))
         updateproduct.name = form.name.data
         updateproduct.price = request.form.get('price')
         updateproduct.dicsount = form.discount.data
@@ -213,7 +211,7 @@ def updateproduct(id):
         return redirect(url_for('admin'))
 
     return render_template('products/updateproducts.html', title='update product page',
-            updateproduct=updateproduct, brands=brands, categories=categories)
+            updateproduct=updateproduct, brands=brands, categories=categories, colors=colors)
 
 
 @app.route('/deleteproduct/<int:id>', methods=['POST', 'GET'])
@@ -224,3 +222,22 @@ def deleteproduct(id):
     db.session.commit()
     flash(f'the product name: {product}, was successfully deleted', 'success')
     return redirect(url_for('admin'))
+
+@app.route('/addcolor', methods=['GET', 'POST'])
+def add_color():
+    if 'username' not in session:
+        flash('please loggin first', 'danger')
+        return redirect(url_for('login'))
+
+    if request.method == 'POST':    
+        get_color = request.form.get('name_color')
+        
+        color = Color(name_color=get_color)
+        print(request.form)
+        db.session.add(color)
+        db.session.commit()
+        flash(f'the color {get_color} was successfuly added to your database', 'success')
+        
+        return render_template('products/add_colors.html')
+
+    return render_template('products/add_colors.html', title='add color page')# form=form,  categories=category)

@@ -19,21 +19,7 @@ from flask_wtf import FlaskForm
 
 
 
-@app.route('/customer/register', methods=['GET', 'POST'])
-def customer_register():
-    form = CustomerRegestrationForm()
-    if form.validate_on_submit():
-        hash_password = bcrypt.generate_password_hash(form.password.data)
-        register = Register(
-                            name=form.name.data, username=form.username.data, email=form.email.data,
-                            password=hash_password, country=form.country.data, state=form.state.data,
-                            city=form.city.data, adress=form.adress.data, zipcode=form.zipcode.data
-                            )
-        db.session.add(register)
-        db.session.commit()
-        flash(f'thanks {form.name.data} for you\'re registration', 'success')
-        return url_for('customerLogin', form=form)
-    return render_template('customer/register.html', form=form)
+
 
 @app.route('/customer/login', methods=['GET', 'POST'])
 def customerLogin():
@@ -43,11 +29,31 @@ def customerLogin():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
             next = request.args.get('next')
-            return redirect(next or url_for('home'))
+            return redirect(next or url_for('mono_product'))
         else:
             flash('Incorrect credential', 'danger')
             return redirect(url_for('customerLogin'))
     return render_template('customer/logincustomer.html', form=form)
+
+
+@app.route('/customer/register', methods=['GET', 'POST'])
+def customer_register():
+    form = CustomerRegestrationForm()
+    if form.validate_on_submit():
+        next = request.args.get('next')
+        hash_password = bcrypt.generate_password_hash(form.password.data)
+        register = Register(
+                            name=form.name.data, username=form.username.data, email=form.email.data,
+                            password=hash_password, country=form.country.data, state=form.state.data,
+                            city=form.city.data, adress=form.adress.data, zipcode=form.zipcode.data
+                            )
+        db.session.add(register)
+        db.session.commit()
+        flash(f'thanks {form.name.data} for you\'re registration', 'success')
+        #return url_for('customerLogin', form=form)
+        return redirect(next or url_for('customerLogin', form=form))
+    return render_template('customer/register.html', form=form)
+
 
 
 @app.route('/customer/logout')

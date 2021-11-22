@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
     {% block content %}
-    {% include 'head.html' %}
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,7 +31,6 @@
                 <img src="{{ url_for('static', filename='css/css_images/black.png') }}" alt="black watch skull watch brand" class="product">
             </div>
         </div>
-
         <div class="color_selection_container">
             <button class="color_silver">
                 <input type="checkbox" id="silver" class="color_check">
@@ -42,12 +40,59 @@
             </button>
             <span id="ball"></span>
         </div>
-
+        <!--
         <div class="add_cart">
             <div class="image_container_add">
                 <img id="checkout_icon" src="{{ url_for('static', filename='css/css_images/check-outb.png') }}" alt="">
             </div>
         </div>
+        -->
+
+        
+    
+        {% for product in products.items %}
+        <div class="product_card" id="color_to_select_{{product.name}}">
+            
+            <!--<h2 class="product_title">{{product.name}}</h2>
+            {% if product.discount > 0 %}
+            <h3 class="product_discount">
+               discount  -{{product.discount}}%
+            </h3>
+            {% endif %}
+            <h3 class="product_price">
+                {{product.price}} €
+            </h3>-->
+            <div class="product_card_footer">
+                <span class="left">
+                    <form action="{{url_for('AddCart')}}" method="POST">
+                        <input type="hidden" name="product_id" value="{{product.id}}"  style="visibility: hidden;">
+                        
+                        <input type="number" name="quantity" id="" value=1 min=1 max={{product.stock}} style="visibility: hidden;">
+                        
+                        <select name="colors" id="colors" style="visibility: hidden;">
+                            {% for color in color %}
+                            {% set col = color.split(':') %}
+                            <option value="{{col[0]}}">
+                                {{col[0]|capitalize}}
+                            </option>
+                            {% endfor %}
+                        </select>
+                        <div class="add_cart">
+                            <div class="image_container_add">
+                                <button class="add_cart_button" type="submit"></button>
+                                <img id="checkout_icon" src="{{ url_for('static', filename='css/css_images/check-outb.png') }}" alt="">
+                            </div>
+                        </div>
+                    </form>
+                </span>
+                <span class="right">
+                    <a href="{{url_for('single_page', id=product.id)}}">details</a>
+                </span>
+            </div>
+
+        </div>
+        {% endfor %}
+   
     </section>
 
     <section class="product_description_screen">
@@ -163,10 +208,13 @@
         const black_product = document.getElementById('black_container');
         const check_ball = document.getElementById('ball')
         const clouds = document.getElementById('clouds')
+        const add_silver_to_cart = document.getElementById('color_to_select_skull1');
+        const add_black_to_cart =  document.getElementById('color_to_select_skull2');
         // set black checkbox to true because the default choice is black
         checkbox_black.checked = true;
         // set silver checkbox to false because default choice is black
         checkbox_silver.checked = false;
+        add_silver_to_cart.classList.toggle('hidden');
 
         // silver button clicked
         checkbox_silver.addEventListener('change', ()=>{
@@ -179,8 +227,10 @@
             checkbox_black.checked = false;
             // hide black product container
             black_product.classList.toggle('hidden');
+            add_black_to_cart.classList.toggle('hidden');
             // set visible the sivler container
             silver_product.classList.remove('hidden');
+            add_silver_to_cart.classList.remove('hidden');
             // remove right class
             check_ball.classList.remove('right');
             // set check ball on silver mode
@@ -200,8 +250,10 @@
             checkbox_silver.checked = false;
             // hide silver product container
             silver_product.classList.toggle('hidden');
+            add_silver_to_cart.classList.toggle('hidden');
             // set visible the black container
             black_product.classList.remove('hidden');
+            add_black_to_cart.classList.remove('hidden');
             // remove left class
             check_ball.classList.remove('left');
             // set check ball on silver mode
@@ -211,6 +263,12 @@
         });
     </script>
     <footer></footer>
+
+
+
+
 </body>
+
+
 {% endblock content %}
 </html>

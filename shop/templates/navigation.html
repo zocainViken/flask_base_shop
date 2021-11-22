@@ -1,39 +1,10 @@
 
 
 
-<div class="nav_container">
+
     <nav class="nav">
         <ul class="">
             <li><a href="/">Acceuil</a></li>
-            
-            <li>
-                <a href="/">brand</a>
-                {% if brands %}
-                <ul class="submenu">
-                    {% for brand in brands %}
-                    <li>
-                        <a href="{{url_for('getbrand', id=brand.id)}}">{{brand.name}}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-            </li>
-            <li>
-                <a href="/">category</a>
-                {% if categories %}
-                <ul class="submenu">
-                    {% for category in categories %}
-                    <li>
-                        <a href="{{url_for('getcategory', id=category.id)}}">{{category.name}}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-            <li>
-                <form action="{{url_for('result')}}">
-                    <input type="search" name="q" placeholder='Search' id="">
-                    <button type="submit">Search</button>
-                </form>
             </li>
             {% if current_user.is_authenticated %}
                 <li><a href="{{url_for('customer_logout')}}">Logout</a></li>            
@@ -47,4 +18,6 @@
             
         </ul>
     </nav>
-</div>
+
+
+

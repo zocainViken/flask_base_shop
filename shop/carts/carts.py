@@ -45,10 +45,9 @@ def AddCart():
                     'name':product.name,
                     'price':int(product.price),
                     'discount':int(product.discount),
-                    'colors':colors,
                     'image':product.image_1,
                     'quantity':quantity,
-                    'color':product.colors
+                    'color':product.color.name_color
                 }
             }
             
@@ -69,6 +68,7 @@ def AddCart():
     
     except Exception as e:
         print(str(e))
+        print('carts.py line 71')
 
     finally:
         return redirect(request.referrer)
