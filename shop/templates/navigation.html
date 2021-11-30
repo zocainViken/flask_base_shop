@@ -4,7 +4,7 @@
 
     <nav class="nav">
         <ul class="">
-            <li><a href="/">Acceuil</a></li>
+            <li><a href="/monoproduct">Shop</a></li>
             </li>
             {% if current_user.is_authenticated %}
                 <li><a href="{{url_for('customer_logout')}}">Logout</a></li>            
@@ -14,7 +14,7 @@
             <li><a href="{{url_for('customer_register')}}">Sign in</a></li>
             
             {% endif %}
-            <li><a href="/">checkout</a></li>
+            <li><a href="/checkout">checkout</a></li>
             
         </ul>
     </nav>

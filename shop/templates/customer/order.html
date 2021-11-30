@@ -6,63 +6,129 @@
 <body>
     {% include 'navigation.html' %}
     {{session['Shoppingcart']}}
-
-    <h2>Resume command</h2>
-    <div class="row">
+    <section class="main_screen">
+        <h2>Resume command</h2>
 
         <div>Inoice: {{orders.invoice}}</div>
         <div>Status: {{orders.status}}</div>
         <div>Name: {{customer}}</div>
         <div>email: {{customer.email}}</div>
         <div>Contact: {{customer.contact}}</div>
-        <table>
-            <thead>
-                <th>Sr</th>
-                <th>Name</th>
-                <th>Image</th>
-                <th>Color</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Discount</th>
-                <th>SubTotal</th>
-            </thead>
-            <tbody>
-                {% for key, product in orders.orders.items() %}
-                {% set discount = (product.discount/100) * product.price|float %}
-                <tr>
-                    <form action="{{url_for('updatecart', code=key)}}" method="POST">
-                        <td>{{loop.index}}</td>
-                        <td>{{product.name}}</td>
-                        <td><img src="{{url_for('static', filename='images/'+product.image)}}" alt="{{product.name}}" width="50" height="60"></td>
-                        <td>{{product.color}}</td>
-                        <td>{{product.price}}</td>
+
+        <div class="product_array">
+            <table class="responsive-array">
+                <thead>
+                    <th>Sr</th>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Color</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Discount</th>
+                    <th>SubTotal</th>
+                </thead>
+                <tbody>
+                    {% for key, product in orders.orders.items() %}
+                    {% set discount = (product.discount/100) * product.price|float %}
+                    <tr>
+                        <form action="{{url_for('updatecart', code=key)}}" method="POST">
+                            <td data-label="Index">{{loop.index}}</td>
+                            <td data-label="Name">{{product.name}}</td>
+                            <td data-label="Image" class="img_container"><img src="{{url_for('static', filename='images/'+product.image)}}" alt="{{product.name}}" width="50" height="60"></td>
+                            <td data-label="Color">{{product.color}}</td>
+                            <td data-label="Price">{{product.price}}</td>
+                            <td data-label="Quantity">{{product.quantity}}</td>
+                            {% if product.discount > 0 %}
+                            <td data-label="Discount">{{product.discount}} % is {{discount}}</td>
+                            {% else %}
+                            <td data-label="Discount">NaN</td>
+                            {% endif %}
+                            {% set subTotal = product.quantity|int * product.price|float %}
+                            <td data-label="Subtotal">{{'%0.2f'|format(subTotal - discount|float)}}</td>
+                            
+                        </form>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td><button type="submit">checkout</button></td>
+                        <td><a href="{{url_for('get_order')}}">Order now</a></td>
+                        <td>Tax: {{tax}} €</td>
+                        <td>Total: {{grandTotal}} €</td>
                         <td>
-                            <h3>{{product.quantity}}</h3>
+                            <a href="{{url_for('get_pdf', invoice=orders.invoice)}}">Get PDF</a>
                         </td>
-                        {% if product.discount > 0 %}
-                        <td>{{product.discount}} % is {{discount}}</td>
-                        {% else %}
-                        <td>-</td>
-                        {% endif %}
-                        {% set subTotal = product.quantity|int * product.price|float %}
-                        <td>{{'%0.2f'|format(subTotal - discount|float)}}</td>
-                        
-                    </form>
-                </tr>
-                {% endfor %}
-                <tr>
-                    <td><button type="submit">checkout</button></td>
-                    <td><a href="{{url_for('get_order')}}">Order now</a></td>
-                    <td><a href="/">Shopping</a></td>
-                    <td>Tax: {{tax}} €</td>
-                    <td>Total: {{grandTotal}} €</td>
-                    <td>
-                        <a href="{{url_for('get_pdf', invoice=orders.invoice)}}">Get PDF</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="order_container">
+                <div class="order_pannel">
+
+                    <div class=" circle_button">
+                        Delete All
+                        <div class=" cirle_container">
+                            <div class=" circle_icon_container">
+                                X
+                                <div class=" circle_icon_button" >
+                                    <div class=" circle_icon_button_link_container" data-label="Delete All">
+                                        <a class="link" href="{{url_for('clearcart')}}"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="order_pannel_header">
+                        OrderNow
+                        <div class="add_cart">
+                            <div class="image_container_add">
+                                X
+                                <div class="add_cart_button" >
+                                    <div class="order_pannel_delete" data-label="Delete All">
+                                        <a class="delete_link" href="{{url_for('clearcart')}}"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="order_pannel_header">
+                        GetPDF
+                        <div class="add_cart">
+                            <div class="image_container_add">
+                                X
+                                <div class="add_cart_button" >
+                                    <div class="order_pannel_delete" data-label="Delete All">
+                                        <a class="delete_link" href="{{url_for('clearcart')}}"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="order_pannel_body">
+                        <!--<td><a href="/">Shopping</a></td>-->
+                        <div class="order_tax line" data-label="TVA">TVA: {{tax}} €</div>
+                        <div class="order_total line" data-label="Total">Total: {{grandtotal}} €</div>
+                    </div>
+                    
+                    <div class="order_pannel_footer">
+                        <div class="add_cart">
+                            <div class="image_container_add">
+                                Buy
+                                <div class="add_cart_button" >
+                                    <div class="order_pannel_buy" data-label="Buy">
+                                        <a class="order_link" href="{{url_for('get_order')}}">Buy</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    
 
 
 

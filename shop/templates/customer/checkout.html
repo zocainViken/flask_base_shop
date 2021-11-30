@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% block content %}
+    {% include 'monoproduct_head.html' %}
+<body>
+    
+    {% include 'navigation.html' %}
+
+    <div class="screen">
+        <form action="" class="product_selection"><h2>Product Selection</h2>
+            <div class="inputbox">
+                <input type="text" required="required" name="username">
+                <span class="text">color</span>
+                <span class="line"></span>
+            </div>
+        </form>
+        <form method='POST', enctype="multipart/form-data" class="formcontainer">
+            {{ form.csrf_token }}
+            
+
+            <h2>User Registration</h2>
+            <div class="inputbox">
+                <input type="text" required="required" name="username">
+                <span class="text">First Name</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="name">
+                <span class="text">Name</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="email">
+                <span class="text">Email</span>
+                <span class="line"></span>
+            </div>
+
+
+            <div class="inputbox">
+                <input type="text" required="required" name="country">
+                <span class="text">Country</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="state">
+                <span class="text">state</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="city">
+                <span class="text">City</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="" name="contact">
+                <span class="text">Contact Phone</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="adress">
+                <span class="text">Adress</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="zipcode">
+                <span class="text">Zipcode</span>
+                <span class="line"></span>
+            </div>
+            <h2>Bank Registration: <strong>Temp save this data</strong></h2>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="username">
+                <span class="text">First Name</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="username">
+                <span class="text">Credit Card Number</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="username">
+                <span class="text">Expiration Date</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="username">
+                <span class="text">CVV</span>
+                <span class="line"></span>
+            </div>
+
+            <input type="submit" value="Send">          
+        </form>
+    </div>
+
+</body>
+{% endblock content %}
+</html>
+
+
+
+
+
+
+
+
+
+
+<html>
+
+<head>
+
+
+  <meta charset="utf-8"/>
+
+
+  <!-- Optimal rendering on mobile devices. -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Optimal Internet Explorer compatibility -->
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+
+  <!-- Sample CSS styles for demo purposes. You can override these styles to match your web page's branding. -->
+
+
+</head>
+
+<body>

@@ -10,6 +10,17 @@ from shop.products.models import add_product
 from shop.routes import brands, categories
 
 
+def tax_calculator(tax, price):
+    # calculate %
+    # (2.9*150/100)  
+    #  ==> 
+    # tax x price / 100
+    money = float(price)
+    taxing = float(tax)# 2.9%
+    tax_amount = taxing * money / 100
+    total = money + tax_amount
+    return tax_amount, total
+
 def drink(sentence):
     print(f'\n\n', sentence, '\n\n\n')
 
@@ -21,8 +32,6 @@ def dict_merger(dict_1, dict_2):
         return dict(list(dict_1.items()) + list(dict_2.items()))
     
     return False
-
-
 
 
 
@@ -73,8 +82,6 @@ def AddCart():
     finally:
         return redirect(request.referrer)
 
-
-
 @app.route('/carts')
 def getCart():
     if'Shoppingcart' not in session or len(session['Shoppingcart']) <= 0:
@@ -82,12 +89,13 @@ def getCart():
     
     subtotal = 0
     grandtotal = 0
+    TVA = 20
     for key, product in session['Shoppingcart'].items():
         discount = (product['discount'] / 100 ) * float(product['price'])
         subtotal += float(product['price'])# * int(product['quantity'])
         subtotal -= discount
-        tax = '%.2f' % (.06 * float(subtotal))
-        grandtotal = float('%.2f' % (1.06 * subtotal))
+        
+        tax, grandtotal = tax_calculator(TVA, subtotal)
 
     return render_template('products/carts.html',title='cart page', tax=tax, grandtotal=grandtotal, brands=brands(), categories=categories())
 

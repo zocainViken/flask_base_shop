@@ -1,14 +1,11 @@
 
-
-
-
 from operator import ipow
 from flask import redirect, render_template, url_for, flash, request, session, request, make_response
 
 from shop import db, app, photos, bcrypt, search, login_manager
 from flask_login import login_required, current_user, logout_user, login_user
-from .forms import CustomerLoginForm, CustomerRegestrationForm
-from .models import Register, CustomerOrder
+from .forms import CustomerLoginForm, CustomerRegestrationForm, UncustomerRegestrationForm
+from .models import Register, CustomerOrder, RegisterUncustomer, RegisterUncustomerTempBankData
 import os
 import secrets
 from shop.admin.forms import RegistrationForm, LoginForm
@@ -19,6 +16,27 @@ from flask_wtf import FlaskForm
 
 
 
+
+@app.route('/checkout', methods=['GET', 'POST'])
+def checkout():
+    form = UncustomerRegestrationForm()# Make a New db for the customer witout loggin and made a class for it
+    if form.validate_on_submit():
+        next = request.args.get('next')
+        hash_password = bcrypt.generate_password_hash(form.password.data)
+        register = Register(
+                            name=form.name.data, username=form.username.data, email=form.email.data,
+                            country=form.country.data, state=form.state.data, city=form.city.data, 
+                            adress=form.adress.data, zipcode=form.zipcode.data
+                            )
+        db.session.add(register)
+        db.session.commit()
+        flash(f'thanks {form.name.data} for you\'re registration', 'success')
+        #return url_for('customerLogin', form=form)
+        return redirect(next or url_for('customerLogin', form=form))
+    return render_template('customer/checkout.html', form=form)
+    # basic form checkout for people that are not logged
+    # what i need : name, first name , adress, some data payment
+    return render_template('customer/checkout.html')
 
 
 @app.route('/customer/login', methods=['GET', 'POST'])
@@ -53,7 +71,6 @@ def customer_register():
         #return url_for('customerLogin', form=form)
         return redirect(next or url_for('customerLogin', form=form))
     return render_template('customer/register.html', form=form)
-
 
 
 @app.route('/customer/logout')
@@ -92,10 +109,9 @@ def orders(invoice):
         grandTotal = 0
         subTotal = 0
         customer_id = session['_user_id']
-        print(session)
         customer = Register.query.filter_by(id=customer_id).first()
         print(customer)
-        orders = CustomerOrder.query.filter_by(customer_id=customer_id).first()
+        orders = CustomerOrder.query.filter_by(customer_id=customer_id)[-1]# The Last Order
         for _key, product in orders.orders.items():
             discount = (product['discount'] / 100) * float(product['price'])
             subTotal =  float(product['price']) * int(product['quantity'])
@@ -109,8 +125,6 @@ def orders(invoice):
 
     return render_template('customer/order.html', invoice=invoice, tax=tax, subTotal=subTotal,
                             grandTotal=grandTotal, customer=customer, orders=orders)
-
-
 
 
 @app.route('/get_pdf/<invoice>')

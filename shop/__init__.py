@@ -55,3 +55,4 @@ from shop.products import routes
 from shop.admin import routes
 from shop.carts import carts
 from shop.customers import routes
+from shop.paypal_stuff import routes

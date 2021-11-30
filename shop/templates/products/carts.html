@@ -11,7 +11,6 @@
         {% include 'navigation.html' %}
     </div>
 
-    {{session['Shoppingcart']}}
 
     <section class="main_screen">
         
@@ -24,13 +23,10 @@
                     <th>Name</th>
                     <th>Image</th>
                     <th>Color</th>
-                    <th>Color Update</th>
                     <th>Price</th>
                     <th>Quantity</th>
-                    <th>Quantity Update</th>
                     <th>Discount</th>
                     <th>Subtotal</th>
-                    <th>Save</th>
                     <th>X</th>
                 </thead>
                 <tbody>
@@ -40,23 +36,14 @@
                         <form action="{{url_for('updatecart', code=key)}}" method="POST">
                             
                             <td data-label="Index">{{loop.index}}</td>
-                            <td data-label="Name">{{product.name}}</td>
+                            <td class="productName" data-label="Name">{{product.name}}</td>
                             <td data-label="Image" class="img_container"><img src="{{url_for('static', filename='images/'+product.image)}}", alt="{{product.name}} mechanical watch" width="100", height="150"></td>
                             
                             <td data-label="Color">{{product.color}}</td>
-                            <td data-label="Color Update">
-                                <select name="color" id="color">
-                                    <option value="{{product.color}}" style="">
-                                        {{product.color|capitalize}}
-                                    </option>
-                                </select>
-                            </td>
-                            <td data-label="Price">{{product.price}}</td>
+                           
+                            <td class="productPrice" data-label="Price">{{product.price}} <span> €</span></td>
                             <td data-label="Quantity">{{product.quantity}}</td>
-                            <td data-label="Quantity Update">
-                                <input type="number" name="quantity" min=1 max=10 value={{product.quantity}}>
-                                
-                            </td>
+                            
                             {% if product.discount > 0 %}
                             <td data-label="Discount">{{product.discount}} % is {{discount}}</td>
                             {% else %}
@@ -64,7 +51,6 @@
                             {% endif %}
                             {% set subtotal = product.quantity|int * product.price|float %}
                             <td data-label="Subtotal">{{'%0.2f'|format(subtotal - discount|float)}}</td>
-                            <td data-label="Save"><button type="submit">Save</button></td>
                         </form>
                         <td data-label="Delete"><a href="{{url_for('deleteitem', id=key)}}">X</a></td>
                     </tr>
@@ -92,13 +78,14 @@
                     <div class="order_pannel_body">
                         <!--<td><a href="/">Shopping</a></td>-->
                         <div class="order_tax line" data-label="TVA">TVA: {{tax}} €</div>
-                        <div class="order_total line" data-label="Total">Total: {{grandtotal}} €</div>
+                        <div id="total" class="order_total line" data-label="Total">{{grandtotal}} <span> €</span></div>
                     </div>
                     
                     <div class="order_pannel_footer">
-                        <div class="add_cart">
+                        
+                        <div class="add_cart buy" id="buy">
                             <div class="image_container_add">
-                                Buy
+                            -->
                                 <div class="add_cart_button" >
                                     <div class="order_pannel_buy" data-label="Buy">
                                         <a class="order_link" href="{{url_for('get_order')}}">Buy</a>
@@ -115,7 +102,8 @@
     </section>
     
 
-
+    {% include 'button/smartbutton.html' %}
+    
 
 
 
