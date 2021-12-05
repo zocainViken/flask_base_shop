@@ -2,3 +2,4 @@ shop/*.db
 shop/templates/button/smartbutton.html
 tmp.txt
 setup.py
+test.py
