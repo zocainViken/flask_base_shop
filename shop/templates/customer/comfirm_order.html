@@ -1,0 +1,111 @@
+
+    <link rel="stylesheet" href="../../static/css/main.css">
+    
+    {% block content %}
+    
+    {% include 'head.html' %}
+
+    <div class="screen">
+        
+        
+        <!--
+        <div>Invoice: {{orders.invoice}}</div>
+        <div>Status: {{orders.status}}</div>
+        <div>Name: {{customer}}</div>
+        <div>email: {{customer.email}}</div>
+        <div>Contact: {{customer.contact}}</div>
+        -->
+
+        <form method='POST', enctype="multipart/form-data" class="formcontainer">
+            <h2>Shipping Address</h2>
+            <div class="comfirm_adress_product_container">
+                <div class="comfirm_adress_image_container">
+                    <img src="{{url_for('static', filename='images/'+product_image)}}", alt="{{product_name}} mechanical watch" width="100", height="150">
+                </div>
+                <div class="comfirm_adress_product_detail">
+                    <div class="comfirm_adress_color_container">
+                        <div class="inputbox">
+                            <input type="hidden" required="required" name="color" value="{{product_color}}">
+                            <input type="hidden" required="required" name="customer_id" value="{{customer.id}}">
+                            <input type="hidden" required="required" name="invoice" value="{{invoice}}">
+                            <input type="hidden" required="required" name="payer_id" value="{{payer.id}}">
+                            <input type="hidden" required="required" name="tva" value="{{payer.tva_amount}}">
+                            <span class="text">Color: {{product_color}}</span>
+                            <span class="line"></span>
+                        </div>
+                        <div class="comfirm_adress_price_container">
+                            <div class="inputbox">
+                                <input type="hidden" required="required" name="grand_total" value="{{grand_total}}">
+                                <span class="text">Price: "{{grand_total}}"</span>
+                                <span class="line"></span>
+                            </div>
+                    </div>
+                    </div>
+                
+                </div>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="username" value="{{customer.username}}">
+                <span class="text">First Name</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="name" value="{{customer.name}}">
+                <span class="text">Name</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="email" value="{{customer.email}}">
+                <span class="text">Email</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="phone" value="{{customer.contact}}">
+                <span class="text">Phone</span>
+                <span class="line"></span>
+            </div>
+
+
+            <div class="inputbox">
+                <input type="text" required="required" name="country" value="{{customer.country}}">
+                <span class="text">Country</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="state" value="{{customer.state}}">
+                <span class="text">state</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="city" value="{{payer.city_1}}">
+                <span class="text">City</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="adress" value="{{payer.street}}">
+                <span class="text">Adress</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="zipcode" value="{{payer.postal_code}}">
+                <input type="hidden" required="required" name="product_name" value="{{product_name}}">
+                <span class="text">Zipcode</span>
+                <span class="line"></span>
+            </div>
+            
+            <input type="submit" value="Send">
+            <!--Put a shipping truck icon for the input-->          
+        </form>
+    </div>
+    
+    {% endblock content %}
+
+    

@@ -1,0 +1,150 @@
+
+    
+    {% block content %}
+    
+    <link rel="stylesheet" href="../../static/css/pdf.css">
+<!--
+    <link rel="stylesheet" href="../../static/css/pdf.css">
+    
+    <section id='screen' class="main_view screen" >
+        <form method='POST', enctype="multipart/form-data" class="formcontainer">
+            <h2>Last Order</h2>
+
+            <div class="customer_name">
+                <div class="inputbox_order">
+                    <input type="text" required="required" value="{{order.firstname}}">
+                    <span class="text">First Name: </span>
+                    <span class="line"></span>
+                </div>
+    
+                <div class="inputbox_order">
+                    <span class="text">Name: {{order.name}}</span>
+                    <span class="line"></span>
+                </div>
+            </div>
+
+            <div class="inputbox_order">
+                <span class="text">Email: {{order.mail}}</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox_order">
+                <span class="text">Phone: {{order.phone}}</span>
+                <span class="line"></span>
+            </div>
+
+
+            <div class="inputbox_order">
+                <span class="text">Country: {{order.country}}</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox_order">
+                <span class="text">state: {{order.state}}</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox_order">
+                <span class="text">City: {{order.city}}</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox_order">
+                <span class="text">Adress: {{order.street}}</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox_order">
+                <span class="text">Zipcode: {{order.postal_code}}</span>
+                <span class="line"></span>
+            </div>
+            
+            <div class="order_resume_product_container">
+                <div class="order_resume_image_container">
+                    <img src="{{url_for('static', filename='images/'+product_image)}}", alt="{{product_name}} mechanical watch" width="100", height="150">
+                </div>
+                <div class="order_resume_product_detail">
+                    <div class="order_resume_color_container">
+                        <div class="inputbox">
+                            <input type="hidden" required="required" name="tva" value="{{tva}}">
+                            <span class="text">Color: {{order.color}}</span>
+                            <span class="line"></span>
+                        </div>
+                        <div class="order_resume_price_container">
+                            <div class="inputbox">
+                                <span class="text">Price: "{{price}}"</span>
+                                <span class="line"></span>
+                            </div>
+                            <div class="inputbox">
+                                <input type="hidden" required="required" name="grand_total" value="{{tva}}">
+                                <span class="text">TVA: "{{tva}}"</span>
+                                <span class="line"></span>
+                            </div>
+                    </div>
+                    </div>
+                
+                </div>
+            </div>
+
+        </form>
+        
+    </section>
+    -->
+   <body>
+    <section class="pdf_container">
+        <h2>Resume Order</h2>
+        <div class="name">
+            <div class="container left row">
+                <span class="text">First Name: </span>
+                <span class="line"></span>
+            </div>
+            <div class="container right row">
+                <span class="text">Name: </span>
+                <span class="line"></span>
+            </div>
+        </div>
+
+        <div class="contact">
+            <div class="left row">
+                <span class="text">mail: </span>
+                <span class="line"></span>
+            </div>
+            <div class="right row">
+                <span class="text">phone: </span>
+                <span class="line"></span>
+            </div>
+        </div>
+        <div class="address">
+            <div class="full">
+                <span class="text">street, postal code, city </span>
+                <span class="line"></span>
+            </div>
+        </div>
+        <div class="order_resume_product_container">
+            <div class="order_resume_image_container">
+                <img src="{{url_for('static', filename='images/'+product_image)}}", alt="{{product_name}} mechanical watch" width="100", height="150">
+            </div>
+            <div class="order_resume_product_detail">
+                <div class="order_resume_color_container">
+                    <div class="inputbox">
+                        <input type="hidden" required="required" name="tva" value="{{tva}}">
+                        <span class="text">Color: {{order.color}}</span>
+                        <span class="line"></span>
+                    </div>
+                    <div class="order_resume_price_container">
+                        <div class="inputbox">
+                            <span class="text">Price: "{{price}}"</span>
+                            <span class="line"></span>
+                        </div>
+                        <div class="inputbox">
+                            <input type="hidden" required="required" name="grand_total" value="{{tva}}">
+                            <span class="text">TVA: "{{tva}}"</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </section>
+   </body>
+{% endblock content %}

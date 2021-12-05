@@ -25,7 +25,7 @@ class Register(db.Model, UserMixin):
     state = db.Column(db.String(50), unique=False)
     city = db.Column(db.String(50), unique=False)
     contact = db.Column(db.String(50), unique=False)
-    adress = db.Column(db.String(50), unique=False)
+    address = db.Column(db.String(50), unique=False)
     zipcode = db.Column(db.String(50), unique=False)
     profile = db.Column(db.String(200), unique=False, default='profile.png')
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
@@ -48,17 +48,6 @@ class RegisterUncustomer(db.Model, UserMixin):
 
     def __repr__(self):
         return '<RegisterUncustommer %r>' % self.name
-
-class RegisterUncustomerTempBankData(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), unique=False)
-    credit_card_number = db.Column(db.Integer, unique=True)
-    CVV = db.Column(db.Integer, unique=False)
-    expiration_date = db.Column(db.Integer, unique=False)
-    date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-
-    def __repr__(self):
-        return '<RegisterUncustommerTempData %r>' % self.name
 
 class JsonEncodedDict(db.TypeDecorator):
     impl = db.Text
@@ -97,23 +86,8 @@ class UncustomerOrder(db.Model):
     def __repr__(self):
         return '<UncustomerOrder %r>' % self.name
 
-class SentdexPaypalPayment(db.Model):
 
-    id = db.Column(db.Integer, primary_key=True)
-    payer_email = db.Column(db.String(50), unique=False, nullable=False)
-    unix = db.Column(db.Integer(), unique=False, nullable=False)
-    payment_date = db.Column(db.VARCHAR(50), unique=False, nullable=False)
-    username = db.Column(db.VARCHAR(30), unique=False, nullable=False)
-    last_name = db.Column(db.VARCHAR(30), unique=False, nullable=False)
-    payment_gross = db.Column(db.Float(6, 2), unique=False, nullable=False)
-    payment_fee = db.Column(db.Float(6, 2), unique=False, nullable=False)
-    payment_net = db.Column(db.Float(6, 2), unique=False, nullable=False)
-    status = db.Column(db.VARCHAR(15), unique=False, nullable=False)
-    txn_id = db.Column(db.VARCHAR(25), unique=True, nullable=False)
-    date_db_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-
-
-class OderProcessing(db.Model):
+class OrderProcessing(db.Model):
     id                 = db.Column(db.Integer, primary_key=True)
     # order
     order_id           = db.Column(db.String(50), unique=False, nullable=False)#   5N575537KH865605U  ==> use it in url for more detail on paypal
@@ -147,7 +121,41 @@ class OderProcessing(db.Model):
     # date
     create_time        = db.Column(db.VARCHAR(50), unique=False, nullable=False)#  2021-11-28T04:06:42Z
     update_time        = db.Column(db.VARCHAR(50), unique=False, nullable=False)#  2021-11-28T04:07:13Z
-    date_db_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    date_created_by_db = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+
+class OrderWaitingToBeSent(db.Model):
+    id           = db.Column(db.Integer, primary_key=True)
+    status       = db.Column(db.String(50), default='Pending', nullable=False)
+    customer_id  = db.Column(db.Integer, unique=False, nullable=False)
+    # unique id from me
+
+    invoice      = db.Column(db.String(50), unique=False, nullable=False)
+    # reference order
+    
+    payer_id     = db.Column(db.String(50), unique=False, nullable=False)
+    #unique id from paypal
+
+    color        = db.Column(db.String(50), unique=False, nullable=False)
+    firstname    = db.Column(db.String(50), unique=False, nullable=False)
+    name         = db.Column(db.String(50), unique=False, nullable=False)
+    mail         = db.Column(db.String(50), unique=False, nullable=False)
+    phone        = db.Column(db.String(50), unique=False, nullable=False)
+    country      = db.Column(db.String(50), unique=False, nullable=False)
+    state        = db.Column(db.String(50), unique=False, nullable=False)
+    city         = db.Column(db.String(50), unique=False, nullable=False)
+    street       = db.Column(db.String(100), unique=False, nullable=False)
+    postal_code  = db.Column(db.Integer, unique=False, nullable=False)
+    amount       = db.Column(db.Float(6, 2), unique=False, nullable=False)
+    tva          = db.Column(db.Float(6, 2), unique=False, nullable=False)
+    product_name = db.Column(db.String(50), unique=False, nullable=False)
+    date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+
+
+
+
+
 
 
 db.create_all()

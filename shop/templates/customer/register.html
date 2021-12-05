@@ -3,32 +3,8 @@
     {% include 'head.html' %}
 <body>
     
-    {% from "admin/_formhelper.html" import render_field %}
     {% include 'navigation.html' %}
     {% block content %}
-    <!--<div style='text-align: center;'>
-        <h2>Register</h2>
-    </div>
-    <form  method='POST', enctype="multipart/form-data">
-        {{ form.csrf_token }}
-        <dl>
-            {{ render_field(form.name) }}
-            {{ render_field(form.username) }}
-            {{ render_field(form.email) }}
-            {{ render_field(form.password) }}
-            {{ render_field(form.confirm) }}
-            {{ form.profile() }}
-        </dl>
-        <dl>
-            {{ render_field(form.country) }}
-            {{ render_field(form.state) }}
-            {{ render_field(form.city) }}
-            {{ render_field(form.contact) }}
-            {{ render_field(form.adress) }}
-            {{ render_field(form.zipcode) }}
-            {{ form.submit() }}
-        </dl>
-    </form>-->
     <div class="screen">
         <form method='POST', enctype="multipart/form-data" class="formcontainer">
             <h2>User Registration</h2>

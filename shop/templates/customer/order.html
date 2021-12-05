@@ -1,15 +1,14 @@
-
+{% include 'head.html' %}
 <!DOCTYPE html>
 <html>
 {% block content %}
-{% include 'monoproduct_head.html' %}
 <body>
     {% include 'navigation.html' %}
     {{session['Shoppingcart']}}
     <section class="main_screen">
         <h2>Resume command</h2>
 
-        <div>Inoice: {{orders.invoice}}</div>
+        <div>Invoice: {{orders.invoice}}</div>
         <div>Status: {{orders.status}}</div>
         <div>Name: {{customer}}</div>
         <div>email: {{customer.email}}</div>
@@ -61,36 +60,8 @@
                 </tbody>
             </table>
             <div class="order_container">
+                Comfirm shipping address
                 <div class="order_pannel">
-
-                    <div class=" circle_button">
-                        Delete All
-                        <div class=" cirle_container">
-                            <div class=" circle_icon_container">
-                                X
-                                <div class=" circle_icon_button" >
-                                    <div class=" circle_icon_button_link_container" data-label="Delete All">
-                                        <a class="link" href="{{url_for('clearcart')}}"></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="order_pannel_header">
-                        OrderNow
-                        <div class="add_cart">
-                            <div class="image_container_add">
-                                X
-                                <div class="add_cart_button" >
-                                    <div class="order_pannel_delete" data-label="Delete All">
-                                        <a class="delete_link" href="{{url_for('clearcart')}}"></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="order_pannel_header">
                         GetPDF
                         <div class="add_cart">
@@ -128,7 +99,6 @@
             </div>
         </div>
     </section>
-    
 
 
 

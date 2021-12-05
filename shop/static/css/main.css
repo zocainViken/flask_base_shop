@@ -523,3 +523,114 @@ span.single_btn_add_cart a:hover{
 }
 
 
+
+
+
+/*
+#############################################################################
+#############################################################################
+            COMFIRMATION ORDER
+#############################################################################
+#############################################################################
+*/
+.comfirm_adress_product_container{
+    display: flex;
+    justify-content: space-around;
+    border: 2px solid aqua;
+    align-items: center;
+}
+.comfirm_adress_image_container{
+    width: 33%;
+}
+.comfirm_adress_product_detail{
+    width: 30%;
+    text-align: center;
+    height: 100%;
+}
+.comfirm_adress_color_container{
+    text-align: center;
+    height: 100%;
+    display: grid;
+    align-items: end;
+}
+.comfirm_adress_color_container .inputbox input{
+    left: 0;
+}
+.comfirm_adress_color_container .inputbox .text{
+    text-align: left;
+}
+.comfirm_adress_price_container{
+    padding-bottom: 13px;
+}
+.comfirm_adress_price_container .inputbox .text{
+    text-align: left;
+}
+
+
+
+
+/*
+#############################################################################
+#############################################################################
+            PDF ORDER
+#############################################################################
+#############################################################################
+*/
+.customer_name{
+    display: flex;
+    justify-content: space-between;
+}
+
+.screen .inputbox_order{
+    position: relative;
+    width: 44%;
+    height: 40px;
+    color: cyan;
+}
+.screen .inputbox_order input{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    padding: 0 10px;
+    z-index: 1;
+    color: black;
+}
+.screen .inputbox_order .text{
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 40px;
+    font-size: 18px;
+    padding: 0 10px;
+    display: block;
+    transition: 0.5s;
+    pointer-events: none;
+}
+.screen .inputbox_order input:focus + .text, .screen .inputbox_order input:valid + .text{
+    top: -35px;
+    left: -15px;
+}
+.inputbox_order dd input:focus + .screen .inputbox_order dt label{
+    top: -40px;
+    left: -15px;
+    background-color: black;
+}
+.screen .inputbox_order .line{
+    position: absolute;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: cyan;
+    transition: 0.5s;
+    border-radius: 2px;
+    pointer-events: none;
+}
+.screen .inputbox_order input:focus ~ .line, .screen .inputbox_order input:valid ~ .line{
+    height: 100%;
+}

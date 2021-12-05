@@ -15,6 +15,22 @@ import os
 
 
 
+@app.route('/adminregister', methods=['GET', 'POST'] )
+def register():
+    form = RegistrationForm(request.form)
+    
+    if request.method == 'POST':# and form.validate():
+        hash_password = bcrypt.generate_password_hash(form.password.data)
+        user = User(name=form.name.data,
+                    username=form.username.data,
+                    email=form.email.data,
+                    password=hash_password)
+        db.session.add(user)
+        db.session.commit()
+        #flash(f'Welcome {form.username.data}, thanks you for registering', 'success')
+        return redirect(url_for('login'))
+    return render_template('admin/register.html',form=form, title='Registration Page')
+
 
 @app.route('/admin', methods=['GET', 'POST'] )
 def admin():
@@ -67,19 +83,3 @@ def brands():
     return render_template('admin/brand.html', title='brand page', brands=brands )
 
 
-
-@app.route('/adminregister', methods=['GET', 'POST'] )
-def register():
-    form = RegistrationForm(request.form)
-    
-    if request.method == 'POST':# and form.validate():
-        hash_password = bcrypt.generate_password_hash(form.password.data)
-        user = User(name=form.name.data,
-                    username=form.username.data,
-                    email=form.email.data,
-                    password=hash_password)
-        db.session.add(user)
-        db.session.commit()
-        #flash(f'Welcome {form.username.data}, thanks you for registering', 'success')
-        return redirect(url_for('login'))
-    return render_template('admin/register.html',form=form, title='Registration Page')

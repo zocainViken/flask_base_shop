@@ -55,7 +55,13 @@ class CustomerLoginForm(FlaskForm):
     password = PasswordField('Password', [validators.DataRequired()])
     
 
-
+    def validate_username(self, username):
+        if Register.query.filter_by(username=username.data).first():
+            raise ValidationError('This username is already in use')
+    
+    def validate_email(self, email):
+        if Register.query.filter_by(email=email.data).first():
+            raise ValidationError('This email adress is already in use')
 
 
 
