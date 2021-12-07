@@ -92,57 +92,63 @@
     -->
    <body>
     <section class="pdf_container">
-        <h2>Resume Order</h2>
+        <h2>SkullWatch</h2>
+        <h2>Resume Order: {{order.invoice}}</h2>
         <div class="name">
-            <div class="container left row">
-                <span class="text">First Name: </span>
-                <span class="line"></span>
+            <div class="container left row first_name">
+                <div class="text">First Name: </div>
+                <div class="line">{{order.firstname}}</div>
             </div>
             <div class="container right row">
-                <span class="text">Name: </span>
-                <span class="line"></span>
+                <div class="text">Name: </div>
+                <div class="line">{{order.name}}</div>
             </div>
         </div>
 
         <div class="contact">
             <div class="left row">
-                <span class="text">mail: </span>
-                <span class="line"></span>
+                <div class="text">mail: </div>
+                <div class="line">{{order.mail}}</div>
             </div>
-            <div class="right row">
-                <span class="text">phone: </span>
-                <span class="line"></span>
-            </div>
-        </div>
-        <div class="address">
-            <div class="full">
-                <span class="text">street, postal code, city </span>
-                <span class="line"></span>
+            <div class=" row">
+                <div class="text">phone: </div>
+                <div class="line">{{order.phone}}</div>
             </div>
         </div>
         <div class="order_resume_product_container">
             <div class="order_resume_image_container">
-                <img src="{{url_for('static', filename='images/'+product_image)}}", alt="{{product_name}} mechanical watch" width="100", height="150">
+                <img class="product_image" src="../../../Documents/Github/flask_base_shop/shop/static/images/{{order.color}}.png", alt="{{product_name}} mechanical watch" >
             </div>
             <div class="order_resume_product_detail">
                 <div class="order_resume_color_container">
-                    <div class="inputbox">
-                        <input type="hidden" required="required" name="tva" value="{{tva}}">
-                        <span class="text">Color: {{order.color}}</span>
-                        <span class="line"></span>
+                    <div class="inputbox row">
+                        <div class="text">Color:</div>
+                        <div class="line detail">{{order.color}}</div>
                     </div>
                     <div class="order_resume_price_container">
-                        <div class="inputbox">
-                            <span class="text">Price: "{{price}}"</span>
-                            <span class="line"></span>
+                        <div class="inputbox row">
+                            <div class="text">Price:</div>
+                            <div class="line detail">{{order.amount - order.tva}}</div>
                         </div>
-                        <div class="inputbox">
+                        <div class="inputbox row">
                             <input type="hidden" required="required" name="grand_total" value="{{tva}}">
-                            <span class="text">TVA: "{{tva}}"</span>
-                            <span class="line"></span>
+                            <div class="text">TVA:</div>
+                            <div class="line detail">{{order.tva}}</div>
+                        </div>
+                        <div class="inputbox row">
+                            <input type="hidden" required="required" name="grand_total" value="{{tva}}">
+                            <div class="text">Total:</div>
+                            <div class="line detail">{{order.amount}}</div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        
+        <div class="address row">
+            <div class="full">
+                <span class="text">Order Address:</span>
+                <span class="line">{{order.street}},{{order.postal_code}}, {{order.city}}</span>
             </div>
         </div>
    </section>

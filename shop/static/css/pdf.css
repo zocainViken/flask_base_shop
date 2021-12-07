@@ -13,9 +13,6 @@ a{
     color: white;
     text-decoration: none;
 }
-h2, h3, h4{
-    color: #00c1ff;
-}
 p{
     color:#98a3a7;
 }
@@ -123,28 +120,101 @@ p{
 
 
 .pdf_container{
-    border: 2px solid red;
+    /*border: 2px solid cyan;*/
     height: 1300px;
     width: 890px;
-    position: absolute;
+    position: relative;
 }
 .pdf_container h2{
     text-align: center;
+    height: 35px;
+    font-size: 40px;
+    font-weight: 600;
 }
 .container{
     width: 45%;
+    border: 2px dotted cyan;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.first_name{
+    left: 25px;
+    position: relative;
+    top: 6px;
+}
+.text{
+    height: 35px;
+    font-size: 25px;
+    font-weight: 600;
+}
+.line{
+    background-color: cyan;
+    color: black;
+    height: 50px;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 600;
+}
+.detail{
+    width: 80%;
+    left: 20%;
+    position: relative;
 }
 .name{
-    display: flex;
-    justify-content: space-around;
-    border: 2px solid yellow;
+    /*display: flex;
+    justify-content: space-around;*/
+    margin-bottom: 13px;
+    display: block;
+}
+.right{
+    position: absolute;
+    right: 19px;
+    top: 141px;
 }
 .row{
     min-height: 70px;
 }
 .contact{
-    width: 40%;
-    border: 2px solid white;
+    width: 45%;
+    position: relative;
+    left: 467px;
+    border: 2px dotted cyan;
+}
+.order_resume_product_container{
+    position: relative;
+    display: flex;
+}
+.order_resume_image_container{
+    position: relative;
+}
+.product_image{
+    width: 488px;
+    height: 360px;
+    position: relative;
+    transform: rotate(77deg);
+    top: 85px;
+}
+.order_resume_product_detail{
+    height: 56.5%;
+    bottom: 10%;
     position: absolute;
-    right: 0;
+    right: 10%;
+    width: 31%;
+}
+.order_resume_color_container{
+    border: 2px dotted cyan;
+}
+
+.address{
+    border: 2px dotted cyan;
+    position: absolute;
+    bottom: 13px;
+    width: 99%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }

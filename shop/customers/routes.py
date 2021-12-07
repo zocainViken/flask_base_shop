@@ -32,7 +32,6 @@ def truncate(number, decimals=0):
     factor = 10.0 ** decimals
     return math.trunc(number * factor) / factor
 
-
 def tax_calculator(tax, price):
     # calculate %
     # (2.9*150/100)
@@ -43,6 +42,27 @@ def tax_calculator(tax, price):
     tax_amount = taxing * money / 100
     total = money + tax_amount
     return tax_amount, total
+
+def tax_reductor(tax, price):
+    # https://www.capte-les-maths.com/pourcentage/les_pourcentages_p10.php
+
+    ##       Coefficient Multiplicateur = 1 +  20   = 1,2
+    ##                                        _____
+    ##                                         100
+    #____________________________________________________________
+    coeff_x = 1 + (tax / 100)#1.2
+
+
+    ##        Prix Initial = 180  = 150
+    ##                      ______
+    ##                        1,2
+    #____________________________________________________________
+    no_tax = price / coeff_x#  150
+    tax_amount = price - no_tax  #30
+
+    return tax_amount, no_tax
+
+
 
 @app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
@@ -82,13 +102,6 @@ def user_interface():
     else:
         print('You are not suposed to be here')
     return redirect(url_for('customerLogin'))
-
-
-
-
-
-
-
 
 
 @app.route('/customer/interface/<invoice>', methods=['GET', 'POST'])
@@ -147,27 +160,20 @@ def last_order(invoice):
     return redirect(url_for('customerLogin'))
 
 
-
-
-
-
-
-
-
-
-
 @app.route('/customer/login', methods=['GET', 'POST'])
 def customerLogin():
     form = CustomerLoginForm()
     print(form.password.data)
     if form.validate_on_submit():
         user = Register.query.filter_by(username = form.username.data).first()
+        print('user')
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
             next = request.args.get('next')
+            print('it work')
             return redirect(next or url_for('mono_product'))
         else:
-            flash('Incorrect credential', 'danger')
+            print('Incorrect credential', 'danger')
             return redirect(url_for('customerLogin'))
     return render_template('customer/logincustomer.html', form=form)
 
@@ -380,33 +386,23 @@ def orders(invoice):
 @login_required
 def get_pdf(invoice):
     if current_user.is_authenticated:
-        grandTotal = 0
-        subTotal = 0
         customer_id = session['_user_id']
         if request.method == 'GET':
-            print('posted data for pdf')
+            print('prepare data for pdf')
             customer = Register.query.filter_by(id=customer_id).first()
             orders = CustomerOrder.query.filter_by(customer_id=customer_id).first()
-            for _key, product in orders.orders.items():
-                discount = (product['discount'] / 100) * float(product['price'])
-                subTotal =  float(product['price']) * int(product['quantity'])
+            
+            rendered = render_template('customer/pdf.html', invoice=invoice, customer=customer,
+                                                            orders=orders)
 
-                subTotal -= discount
-                tax = ('%.2f' % (.06 * float(subTotal)))
-                grandTotal = float('%.2f' % (1.06 * subTotal))
-
-
-        rendered = render_template('customer/pdf.html', invoice=invoice, tax=tax, subTotal=subTotal,
-                                grandTotal=grandTotal, customer=customer, orders=orders)
-
-        path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
-        config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
-        options = {'enable-local-file-access': None}
-        pdf = pdfkit.from_string(rendered, False, configuration=config, options=options)
-        response = make_response(pdf)
-        response.headers['content-Type'] = 'application/pdf'
-        response.headers['content-Disposition'] = 'inline: filename='+invoice+'.pdf'
-        return response
+            #path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+            #config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+            options = {'enable-local-file-access': None}
+            pdf = pdfkit.from_string(rendered, False, options=options)
+            response = make_response(pdf)
+            response.headers['content-Type'] = 'application/pdf'
+            response.headers['content-Disposition'] = 'inline: filename='+invoice+'.pdf'
+            return response
     
     return redirect(url_for('orders'))
 
