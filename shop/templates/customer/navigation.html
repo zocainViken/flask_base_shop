@@ -5,28 +5,18 @@
     </div>
     <ul>
         <li><a href="/customer/interface">administration</a></li>
-        <li><a href="#">messages</a></li>
+        <!--<li><a href="#">messages</a></li>-->
         <li>
-            <a href="#" id="product-btn" class="product-btn" onclick='productView()'>
+            <a href="/customer/interface/personnal_data" id="product-btn" class="product-btn" onclick='productView()'>
                 personnal data
                 <span id='first' class="fas fa-caret-down first"></span>
             </a>
-            <ul id="product-show" class="product-show">
-                <li><a href="/customer/interface">modify</a></li>
-                <!--<li><a href='/updateproduct'>update</a></li>
-                <li><a href='/deleteproduct'>delete</a></li>-->
-            </ul>
         </li>
         <li>
-            <a href="#" id="category-btn" class="category-btn" onclick='categoryView()'>Order<span id='second' class="fas fa-caret-down second"></span></a>
-            <ul id="category-show" class="category-show">
-                <li><a href="/customer/interface">last order</a></li>
-                <li><a href="/customer/interface">all order</a></li>
-            </ul>
+            <a href="/customer/interface/all_orders" id="category-btn" class="category-btn" onclick='categoryView()'>Order<span id='second' class="fas fa-caret-down second"></span></a>
         </li>
-        <li>messages</li>
-        <li>cart</li>
-        <li>logout</li>
+        <li><a href="/carts">cart ({{session['Shoppingcart']|length}})</a></li>
+        <li><a href="{{url_for('customer_logout')}}">Logout</a></li>  
     </ul>
 </nav>
 <script type="text/javascript">

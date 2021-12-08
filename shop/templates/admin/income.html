@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>{{title}}</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <!--<link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>-->
+</head>
+{% block content %}
+{% include 'admin/navigation.html' %}
+
+<section id='main_screen' class="main_view" >
+    <div class="banner">
+        <h2>amount</h2>
+    </div>
+    <div class="product_container">
+        <table>
+            <thead>
+                <thead>
+                    <th>sr</th>
+                    <th>Name</th>
+                    <th>invoice</th>
+                    <th>status</th>
+                    <th>color</th>
+                    <th>subtotal</th>
+                    <th>tva</th>
+                    <th>paypal</th>
+                    <th>total</th>
+                </thead>
+                <tbody>
+                    {% for amount in amounts %}
+                    <tr>
+                        <td>{{amount.id}}</td>
+                        <td>{{amount.customer_id}}</td>
+                        <td>{{amount.invoice}}</td>
+                        <td>{{amount.status}}</td>
+                        <td>{{amount.color}}</td>
+                        <td>{{amount.amount}}</td>
+                        <td>{{amount.tva}}</td>
+                        <td>{{paypal_amount}}</td>
+                        <td>{{for_me}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row">Totals:</th>
+                        <td>{{total}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row">Totals tva:</th>
+                        <td>{{total_tva}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row">Totals paypal:</th>
+                        <td>{{total_paypal}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row"></th>
+                        <th scope="row">Totals for me:</th>
+                        <td>{{total_for_me}}</td>
+                    </tr>
+                </tfoot>
+                
+        </table>
+    </div>
+</section>
+<script type="text/javascript">
+                
+    function mainView(){
+        subProduct = document.getElementById('main_screen');
+        subProduct.classList.toggle("show");
+    };
+
+</script>
+{% endblock content %}

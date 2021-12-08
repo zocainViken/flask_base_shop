@@ -64,26 +64,40 @@ def tax_reductor(tax, price):
 
 
 
-@app.route('/checkout', methods=['GET', 'POST'])
-def checkout():
-    form = UncustomerRegestrationForm()# Make a New db for the customer witout loggin and made a class for it
+@app.route('/customer/register', methods=['GET', 'POST'])
+def customer_register():
+    form = CustomerRegestrationForm()
     if form.validate_on_submit():
         next = request.args.get('next')
         hash_password = bcrypt.generate_password_hash(form.password.data)
         register = Register(
                             name=form.name.data, username=form.username.data, email=form.email.data,
-                            country=form.country.data, state=form.state.data, city=form.city.data, 
-                            adress=form.adress.data, zipcode=form.zipcode.data
+                            password=hash_password, country=form.country.data, state=form.state.data,
+                            city=form.city.data, address=form.adress.data, zipcode=form.zipcode.data
                             )
         db.session.add(register)
         db.session.commit()
         flash(f'thanks {form.name.data} for you\'re registration', 'success')
         #return url_for('customerLogin', form=form)
         return redirect(next or url_for('customerLogin', form=form))
-    return render_template('customer/checkout.html', form=form)
-    # basic form checkout for people that are not logged
-    # what i need : name, first name , adress, some data payment
-    return render_template('customer/checkout.html')
+    return render_template('customer/register.html', form=form)
+
+@app.route('/customer/login', methods=['GET', 'POST'])
+def customerLogin():
+    form = CustomerLoginForm()
+    print(form.password.data)
+    if form.validate_on_submit():
+        user = Register.query.filter_by(username = form.username.data).first()
+        print('user')
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user)
+            next = request.args.get('next')
+            print('it work')
+            return redirect(next or url_for('mono_product'))
+        else:
+            print('Incorrect credential', 'danger')
+            return redirect(url_for('customerLogin'))
+    return render_template('customer/logincustomer.html', form=form)
 
 @app.route('/customer/interface', methods=['GET', 'POST'])
 def user_interface():
@@ -103,6 +117,67 @@ def user_interface():
         print('You are not suposed to be here')
     return redirect(url_for('customerLogin'))
 
+@app.route('/customer/interface/personnal_data', methods=['GET', 'POST'])
+def personnal_data():
+    if current_user.is_authenticated:
+        if request.method == 'GET':
+            customer_id = session['_user_id']
+            customer_data = Register.query.filter_by(id=customer_id).first()
+            return render_template('customer/personnal_data.html', personnal_data=customer_data)
+        
+        elif request.method == 'POST':
+            customer_id = session['_user_id']
+            form = request.form
+
+            registar = Register.query.filter_by(id=customer_id).first()
+            registar.name     = form['name']
+            registar.username = form['username']
+            registar.email    = form['email']
+            registar.country  = form['country']
+            registar.state    = form['state']
+            registar.city     = form['city']
+            registar.address  = form['address']
+            registar.zipcode  = form['zipcode']
+            db.session.commit()
+            return redirect(url_for('user_interface'))
+
+        else:
+            print('something went wrong with the user interface')
+
+
+        return render_template('customer/interface.html')
+    else:
+        print('You are not suposed to be here')
+    return redirect(url_for('customerLogin'))
+
+
+@app.route('/customer/interface/all_orders', methods=['GET', 'POST'])
+def all_orders():
+    if current_user.is_authenticated:
+        if request.method == 'GET':
+            print('GET METHODS')
+            customer_id = session['_user_id']
+            order_data = OrderWaitingToBeSent.query.filter_by(id=customer_id)
+            print(order_data)
+            return render_template('customer/all_orders.html', order_data=order_data)
+        
+        elif request.method == 'POST':
+            print('POST METHODS')
+            customer_id = session['_user_id']
+            form = request.form
+            container = list(form.listvalues())
+            invoice = container[0]
+            #return invoice
+            return redirect(url_for('last_order', invoice=invoice))
+
+        else:
+            print('something went wrong with the user interface')
+
+
+        return render_template('customer/interface.html')
+    else:
+        print('You are not suposed to be here')
+    return redirect(url_for('customerLogin'))
 
 @app.route('/customer/interface/<invoice>', methods=['GET', 'POST'])
 def last_order(invoice):
@@ -157,49 +232,6 @@ def last_order(invoice):
         return render_template('customer/interface.html')
     else:
         print('You are not suposed to be here')
-    return redirect(url_for('customerLogin'))
-
-
-@app.route('/customer/login', methods=['GET', 'POST'])
-def customerLogin():
-    form = CustomerLoginForm()
-    print(form.password.data)
-    if form.validate_on_submit():
-        user = Register.query.filter_by(username = form.username.data).first()
-        print('user')
-        if user and bcrypt.check_password_hash(user.password, form.password.data):
-            login_user(user)
-            next = request.args.get('next')
-            print('it work')
-            return redirect(next or url_for('mono_product'))
-        else:
-            print('Incorrect credential', 'danger')
-            return redirect(url_for('customerLogin'))
-    return render_template('customer/logincustomer.html', form=form)
-
-
-@app.route('/customer/register', methods=['GET', 'POST'])
-def customer_register():
-    form = CustomerRegestrationForm()
-    if form.validate_on_submit():
-        next = request.args.get('next')
-        hash_password = bcrypt.generate_password_hash(form.password.data)
-        register = Register(
-                            name=form.name.data, username=form.username.data, email=form.email.data,
-                            password=hash_password, country=form.country.data, state=form.state.data,
-                            city=form.city.data, address=form.adress.data, zipcode=form.zipcode.data
-                            )
-        db.session.add(register)
-        db.session.commit()
-        flash(f'thanks {form.name.data} for you\'re registration', 'success')
-        #return url_for('customerLogin', form=form)
-        return redirect(next or url_for('customerLogin', form=form))
-    return render_template('customer/register.html', form=form)
-
-
-@app.route('/customer/logout')
-def customer_logout():
-    logout_user()
     return redirect(url_for('customerLogin'))
 
 
@@ -279,8 +311,7 @@ def comfirm_order(invoice):
                                     orders=orders, product_color=product_color,
                                     product_name=product_name, payer=payer,
                                     product_image=product_image)
-
-            
+       
         elif request.method == 'POST':
             ''' if everythings is ok we can get the form data
                 for stock them into database while the order is on 
@@ -409,6 +440,32 @@ def get_pdf(invoice):
 
 
 
+@app.route('/checkout', methods=['GET', 'POST'])
+def checkout():
+    form = UncustomerRegestrationForm()# Make a New db for the customer witout loggin and made a class for it
+    if form.validate_on_submit():
+        next = request.args.get('next')
+        hash_password = bcrypt.generate_password_hash(form.password.data)
+        register = Register(
+                            name=form.name.data, username=form.username.data, email=form.email.data,
+                            country=form.country.data, state=form.state.data, city=form.city.data, 
+                            adress=form.adress.data, zipcode=form.zipcode.data
+                            )
+        db.session.add(register)
+        db.session.commit()
+        flash(f'thanks {form.name.data} for you\'re registration', 'success')
+        #return url_for('customerLogin', form=form)
+        return redirect(next or url_for('customerLogin', form=form))
+    return render_template('customer/checkout.html', form=form)
+    # basic form checkout for people that are not logged
+    # what i need : name, first name , adress, some data payment
+    return render_template('customer/checkout.html')
+
+
+@app.route('/customer/logout')
+def customer_logout():
+    logout_user()
+    return redirect(url_for('customerLogin'))
 
 
 

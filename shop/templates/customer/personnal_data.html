@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    {% include 'head.html' %}
+<body>
+    
+    {% include 'customer/navigation.html' %}
+    {% block content %}
+    <div class="screen">
+        <form method='POST' enctype="multipart/form-data" class="formcontainer">
+            <h2>Personnal Information</h2>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="username" value="{{personnal_data.username}}">
+                <span class="text">First Name</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="name" value="{{personnal_data.name}}">
+                <span class="text">Name</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="email" value="{{personnal_data.email}}">
+                <span class="text">Email</span>
+                <span class="line"></span>
+            </div>
+
+
+            <div class="inputbox">
+                <input type="text" required="required" name="country" value="{{personnal_data.country}}">
+                <span class="text">Country</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="state" value="{{personnal_data.state}}">
+                <span class="text">state</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="city" value="{{personnal_data.city}}">
+                <span class="text">City</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="" name="contact" value="{{personnal_data.contact}}">
+                <span class="text">Contact Phone</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="address" value="{{personnal_data.address}}">
+                <span class="text">Adress</span>
+                <span class="line"></span>
+            </div>
+
+            <div class="inputbox">
+                <input type="text" required="required" name="zipcode"  value="{{personnal_data.zipcode}}">
+                <span class="text">Zipcode</span>
+                <span class="line"></span>
+            </div>
+            <input type="submit" value="Send">               
+        </form>
+    </div>
+    
+    {% endblock content %}
+
+    

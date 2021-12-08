@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>{{title}}</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <!--<link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>-->
+</head>
+{% block content %}
+{% include 'admin/navigation.html' %}
+
+<section id='main_screen' class="main_view" >
+    <div class="banner">
+        <h2>orders</h2>
+    </div>
+    <div class="product_container">
+        <table>
+            <thead>
+                <th>sr</th>
+                <th>Name</th>
+                <th>username</th>
+                <th>invoice</th>
+                <th>status</th>
+                <th>color</th>
+                <th>country</th>
+                <th>state</th>
+                <th>city</th>
+                <th>street</th>
+                <th>postal_code</th>
+                <th>phone</th>
+                <th>mail</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{order.id}}</td>
+                    <td>{{order.name}}</td>
+                    <td>{{order.firstname}}</td>
+                    <td>{{order.invoice}}</td>
+                    <td>{{order.status}}</td>
+                    <td>{{order.color}}</td>
+                    <td>{{order.country}}</td>
+                    <td>{{order.state}}</td>
+                    <td>{{order.city}}</td>
+                    <td>{{order.street}}</td>
+                    <td>{{order.postal_code}}</td>
+                    <td>{{order.phone}}</td>
+                    <td>{{order.mail}}</td>
+                    <td>
+                        <form method='POST', enctype="multipart/form-data" class="formcontainer">
+                            <input type="hidden" required="required" name="invoice" value="{{order.invoice}}">
+                            <input type="hidden" required="required" name="invoice" value="{{order.status}}">
+                            <input type="hidden" required="required" name="invoice" value="{{order.id}}">
+                            <input type="submit" value="Ordered">
+                        </form>
+                        <!--<a href="{{url_for('validate_order', invoice=order.invoice)}}">Ordered</a></td>-->
+                    <td>
+                        <a href="#"> X </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+           
+        </table>
+    </div>
+</section>
+<script type="text/javascript">
+                
+    function mainView(){
+        subProduct = document.getElementById('main_screen');
+        subProduct.classList.toggle("show");
+    };
+
+</script>
+{% endblock content %}

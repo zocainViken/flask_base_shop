@@ -2,18 +2,31 @@ from shop import db
 
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(30), unique=False, nullable=False)
+    id       = db.Column(db.Integer, primary_key=True)
+    name     = db.Column(db.String(30), unique=False, nullable=False)
     username = db.Column(db.String(80), unique=False, nullable=False)
-    email = db.Column(db.String(120), unique=False, nullable=False)
+    email    = db.Column(db.String(120), unique=False, nullable=False)
     password = db.Column(db.String(120), unique=False, nullable=False)
 
-    profile = db.Column(db.String(120),
+    profile  = db.Column(db.String(120),
                         unique=False,
                         nullable=False,
                         default='profile.jpg')
 
     def __repr__(self):
         return '<User %r>' % self.username
+
+
+class OrderWaitingToBeReceiveByCustomer(db.Model):
+    id       = db.Column(db.Integer, primary_key=True)
+    name     = db.Column(db.String(30), unique=False, nullable=False)
+    username = db.Column(db.String(80), unique=False, nullable=False)
+    email    = db.Column(db.String(120), unique=False, nullable=False)
+    invoice  = db.Column(db.String(120), unique=False, nullable=False)    
+
+
+
+
+
 
 db.create_all()

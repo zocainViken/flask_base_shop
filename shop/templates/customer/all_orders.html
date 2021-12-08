@@ -1,0 +1,60 @@
+
+
+{% include 'head.html' %}
+<table class="responsive-array">
+    <thead>
+        <tr>
+            <th>sr</th>
+            <th>status</th>
+            <th>customer id</th>
+            <th>invoice</th>
+            <th>payer id</th>
+            <th>Color</th>
+            <th>firstname</th>
+            <th>name</th>
+            <th>mail</th>
+            <th>phone</th>
+            <th>country</th>
+            <th>state</th>
+            <th>city</th>
+            <th>street</th>
+            <th>postal code</th>
+            <th>amount</th>
+            <th>tva</th>
+            <th>product name</th>
+            <th>. . .</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in order_data %}
+        <tr>
+            <td data-label="Index">{{loop.index}}</td>
+            <td data-label="status">{{order.status}}</td>
+            <td data-label="status">{{order.customer_id}}</td>
+            <td data-label="invoice">{{order.invoice}}</td>
+            <td data-label="payer_id">{{order.payer_id}}</td>
+            <td data-label="Color">{{order.color.name_color}}</td>
+            <td data-label="firstname">{{order.firstname}}</td>
+            <td data-label="name">{{order.name}} </td>
+            <td data-label="mail">{{order.mail}}</td>
+            <td data-label="phone">{{order.phone}}</td>
+            <td data-label="country">{{order.country}}</td>
+            <td data-label="state">{{order.state}}</td>
+            <td data-label="city">{{order.city}} </td>
+            <td data-label="street">{{order.street}}</td>
+            <td data-label="postal code">{{order.postal_code}}</td>
+            <td data-label="amount">{{order.amount}} €</td>
+            <td data-label="tva">{{order.tva}} €</td>
+            <td data-label="product_name">{{order.product_name}}</td>
+            <td data-label="product_name">
+                <div class="more_button">
+                    <form method='POST', enctype="multipart/form-data" class="formcontainer">
+                        <input type="hidden" name="invoice" value="{{order.invoice}}">
+                        <input type="submit" value="More">
+                    </form>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
