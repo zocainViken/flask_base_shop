@@ -171,7 +171,7 @@ def incomes():
 
     elif request.method == 'POST':
         print('POST Methods')
-
+'''
 @app.route('/validate_order', methods=['POST','GET'])
 def validate_order():
     if 'username' not in session:
@@ -180,7 +180,7 @@ def validate_order():
 
     print(request.get_data())
     return 'need to change pending status to prepare and shipping'
-
+'''
 
 
 

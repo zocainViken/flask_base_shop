@@ -192,10 +192,13 @@ def updateproduct(id):
     
     updateproduct = add_product.query.get_or_404(id)
     form = Addproducts(request.form)
-
     name = request.form.get('name') 
-    if request.method == 'POST':
-        updateproduct.colors = request.form.get('color')
+    if request.method == 'POST':    
+        color = request.form.get('color')
+        color_id = Color.query.filter_by(name_color=color).first()
+
+        print(color_id)
+        updateproduct.color = color_id# I need color id here 
         print(request.form.get('color'))
         updateproduct.name = form.name.data
         updateproduct.price = request.form.get('price')

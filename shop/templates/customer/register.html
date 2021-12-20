@@ -6,18 +6,74 @@
     {% include 'navigation.html' %}
     {% block content %}
     <div class="screen">
-        <form method='POST', enctype="multipart/form-data" class="formcontainer">
+        <script>
+            function checkBlank(inputData){
+                if (inputData.value == ""){
+                    alert('Please fill required data');
+                    console.log(inputData)
+                    return false;
+                }
+            }
+            function checkForm(){
+                // we need to check if our inputs are filled
+                // we need to check if password and validate are the same things
+                // we need to check if email had legal format
+                // if everythong is ok we can add it into database
+                firstName       = document.getElementsByName('username');
+                name            = document.getElementsByName('name');
+                mail            = document.getElementsByName('email');
+                password        = document.getElementsByName('password');
+                comfirmPassword = document.getElementsByName('comfirm');
+                country         = document.getElementsByName('country');
+                state           = document.getElementsByName('state');
+                city            = document.getElementsByName('city');
+                phone           = document.getElementsByName('contact');
+                adress          = document.getElementsByName('adress');
+                zipcode         = document.getElementsByName('zipcode');
+
+                const formData = [firstName, name, mail,
+                                  password, comfirmPassword,
+                                  country, state, city,
+                                  phone, adress, zipcode];
+                formData.forEach(checkBlank);
+                console.log('password: ', password[0].value)
+                console.log('comfirm: ', comfirmPassword[0].value)
+                if ( password[0].value != comfirmPassword[0].value){
+                    console.log('Password must be identic');
+                    alert('Password must be identic');
+
+                }
+                console.log('Password correctly passed');
+
+                //regex part for validate email format
+                mail_template = /[a-zA-Z0-9.-]+@[a-zA-Z-]+.com/
+                gmail         = /[a-zA-Z0-9.-]+@gmail.com/
+                laposte       = /[a-zA-Z0-9.-]+@laposte.net/
+                orange        = /[a-zA-Z0-9.-]+@orange.fr/
+                example       = /[a-zA-Z0-9.-]+@example.com/
+                templates     = /[a-zA-Z0-9.-]+@gmail.com|[a-zA-Z0-9.-]+@laposte.net|[a-zA-Z0-9.-]+@orange.fr|[a-zA-Z0-9.-]+@example.com/
+                var message = 'Bonjour les gens !';
+                if(mail[0].value.match(gmail) || mail[0].value.match(laposte) || mail[0].value.match(orange) || mail[0].value.match(example)){
+                    alert('account successfully Created');
+                }
+                else{
+                    alert('Illegal email');
+                }
+                console.log(firstName);
+            };
+        </script>
+        <form method='POST', enctype="multipart/form-data" class="formcontainer" onsubmit="return checkForm()">
             <h2>User Registration</h2>
             {{ form.csrf_token }}
 
             <div class="inputbox">
-                <input type="text" required="required" name="username">
+                <input type="text" required="required" name="username" value="{{ username }}">
                 <span class="text">First Name</span>
                 <span class="line"></span>
             </div>
 
             <div class="inputbox">
-                <input type="text" required="required" name="name">
+                <input type="text" required="required" name="name" value="{{ name }}">
                 <span class="text">Name</span>
                 <span class="line"></span>
             </div>

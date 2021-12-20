@@ -63,37 +63,103 @@ def tax_reductor(tax, price):
     return tax_amount, no_tax
 
 
+import re
+def extract_mail(content):
+    content = content.replace('\\u200b', '')
+    mail_pattern = re.findall(r'[a-zA-Z0-9.-]+@[a-zA-Z-]+\.com', content, re.MULTILINE)
+    if mail_pattern:
+        return mail_pattern
+        print(mail_pattern)
+        #mail.append(f'{mail_pattern}')
+    else:
+        return 'NaN'
+        print('NaN')
+        #mail.append('NaN')
+# https://www.geeksforgeeks.org/check-if-email-address-valid-or-not-in-python/
+# Define a function for
+# for validating an Email
+def check_email(email):
+    # Make a regular expression
+    # for validating an Email
+    valid_mail_format = ['@gmail.com', '@laposte.net', '@orange.fr',
+                         '@example.com']
+    mail_template =r'[a-zA-Z0-9.-]+@[a-zA-Z-]+\.com'
+    gmail =r'[a-zA-Z0-9.-]+@gmail.com'
+    laposte =r'[a-zA-Z0-9.-]+@laposte.net'
+    orange =r'[a-zA-Z0-9.-]+@orange.fr'
+    example =r'[a-zA-Z0-9.-]+@example.com'
+    templates = r'[a-zA-Z0-9.-]+@gmail.com|[a-zA-Z0-9.-]+@laposte.net|[a-zA-Z0-9.-]+@orange.fr|[a-zA-Z0-9.-]+@example.com'
+ 
+
+    # pass the regular expression
+    # and the string into the fullmatch() method
+    mail_pattern = re.findall(templates, email, re.MULTILINE)
+    if mail_pattern:
+#    if(re.fullmatch(mail_template, email)):
+        print("Valid Email")
+        valid = True
+        print(email)
+ 
+    else:
+        print("Invalid Email")
+        valid = False
+
+    return valid
+
 
 @app.route('/customer/register', methods=['GET', 'POST'])
 def customer_register():
     form = CustomerRegestrationForm()
-    if form.validate_on_submit():
-        next = request.args.get('next')
-        hash_password = bcrypt.generate_password_hash(form.password.data)
-        register = Register(
-                            name=form.name.data, username=form.username.data, email=form.email.data,
-                            password=hash_password, country=form.country.data, state=form.state.data,
-                            city=form.city.data, address=form.adress.data, zipcode=form.zipcode.data
-                            )
-        db.session.add(register)
-        db.session.commit()
-        flash(f'thanks {form.name.data} for you\'re registration', 'success')
-        #return url_for('customerLogin', form=form)
-        return redirect(next or url_for('customerLogin', form=form))
+    if request.method == 'POST':
+        name = form.name.data
+        name = str(name).lower()
+        username = form.username.data
+        username = str(username).lower()
+        email = check_email(form.email.data)
+        #next = request.args.get('next')
+        if email:
+            print('I can put it in db')
+            hash_password = bcrypt.generate_password_hash(form.password.data)
+            register = Register(
+                                name=name, username=username, email=form.email.data,
+                                password=hash_password, country=form.country.data, state=form.state.data,
+                                city=form.city.data, contact=form.contact.data, address=form.adress.data, zipcode=form.zipcode.data
+                                )
+            db.session.add(register)
+            db.session.commit()
+            #print('\n\n customer added to database')
+            flash(f'thanks {form.name.data} for you\'re registration', 'success')
+            return redirect(url_for('customerLogin',form=form))
+        else:
+           render_template('customer/register.html',name=name, username=username, form=form,
+                                                    email='Wrong email format',country=form.country.data,
+                                                    state=form.state.data, city=form.city.data, contact=form.contact.data,
+                                                    address=form.adress.data, zipcode=form.zipcode.data
+                                                    )
+
     return render_template('customer/register.html', form=form)
 
 @app.route('/customer/login', methods=['GET', 'POST'])
 def customerLogin():
     form = CustomerLoginForm()
-    print(form.password.data)
-    if form.validate_on_submit():
-        user = Register.query.filter_by(username = form.username.data).first()
-        print('user')
+    # I need to register all my data in minus before add it to database
+    # also I need to reduc all input to minus before checking in into database
+
+    if request.method == 'POST':
+        form = CustomerLoginForm()
+        print(form.password.data)
+        print(form.username.data)
+        username = form.username.data
+        username = username.lower()
+#    if form.validate_on_submit():
+        user = Register.query.filter_by(name = form.username.data).first()
+        print(user)
+        print(bcrypt.check_password_hash(user.password, form.password.data))
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
             next = request.args.get('next')
             print('it work')
-            return redirect(next or url_for('mono_product'))
+            return redirect(next or url_for('user_interface'))
         else:
             print('Incorrect credential', 'danger')
             return redirect(url_for('customerLogin'))
@@ -439,7 +505,7 @@ def get_pdf(invoice):
 
 
 
-
+'''
 @app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
     form = UncustomerRegestrationForm()# Make a New db for the customer witout loggin and made a class for it
@@ -461,7 +527,7 @@ def checkout():
     # what i need : name, first name , adress, some data payment
     return render_template('customer/checkout.html')
 
-
+'''
 @app.route('/customer/logout')
 def customer_logout():
     logout_user()
