@@ -127,15 +127,11 @@ def customer_register():
                                 )
             db.session.add(register)
             db.session.commit()
-            #print('\n\n customer added to database')
+            print('\n\n customer added to database')
             flash(f'thanks {form.name.data} for you\'re registration', 'success')
             return redirect(url_for('customerLogin',form=form))
-        else:
-           render_template('customer/register.html',name=name, username=username, form=form,
-                                                    email='Wrong email format',country=form.country.data,
-                                                    state=form.state.data, city=form.city.data, contact=form.contact.data,
-                                                    address=form.adress.data, zipcode=form.zipcode.data
-                                                    )
+       
+   
 
     return render_template('customer/register.html', form=form)
 

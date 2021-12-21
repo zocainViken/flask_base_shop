@@ -14,11 +14,15 @@
                     return false;
                 }
             }
+            function checkPassword(userPassword){
+                // check if password had min length required
+                // check if password had Digit, Majuscule, SpecialChar
+            }
             function checkForm(){
                 // we need to check if our inputs are filled
                 // we need to check if password and validate are the same things
                 // we need to check if email had legal format
-                // if everythong is ok we can add it into database
+                // if everythong is ok we can keep going
                 firstName       = document.getElementsByName('username');
                 name            = document.getElementsByName('name');
                 mail            = document.getElementsByName('email');
@@ -31,11 +35,14 @@
                 adress          = document.getElementsByName('adress');
                 zipcode         = document.getElementsByName('zipcode');
 
+                // we need to check if our inputs are filled
                 const formData = [firstName, name, mail,
                                   password, comfirmPassword,
                                   country, state, city,
                                   phone, adress, zipcode];
                 formData.forEach(checkBlank);
+                
+                // we need to check if password and validate are the same things
                 console.log('password: ', password[0].value)
                 console.log('comfirm: ', comfirmPassword[0].value)
                 if ( password[0].value != comfirmPassword[0].value){
@@ -50,19 +57,22 @@
                 gmail         = /[a-zA-Z0-9.-]+@gmail.com/
                 laposte       = /[a-zA-Z0-9.-]+@laposte.net/
                 orange        = /[a-zA-Z0-9.-]+@orange.fr/
-                example       = /[a-zA-Z0-9.-]+@example.com/
+                example       = /[a-zA-Z0-9.-]+@personal.example.com/
                 templates     = /[a-zA-Z0-9.-]+@gmail.com|[a-zA-Z0-9.-]+@laposte.net|[a-zA-Z0-9.-]+@orange.fr|[a-zA-Z0-9.-]+@example.com/
                 var message = 'Bonjour les gens !';
                 if(mail[0].value.match(gmail) || mail[0].value.match(laposte) || mail[0].value.match(orange) || mail[0].value.match(example)){
-                    alert('account successfully Created');
+                    //alert('account successfully Created');
+                    
+                    //window.location.replace("http://127.0.0.1:5000/customer/login");
+                    return true;
                 }
                 else{
                     alert('Illegal email');
+                    return false;
                 }
-                console.log(firstName);
             };
         </script>
-        <form method='POST', enctype="multipart/form-data" class="formcontainer" onsubmit="return checkForm()">
+        <form method='POST', enctype="multipart/form-data" class="formcontainer" onsubmit="return checkForm();">
             <h2>User Registration</h2>
             {{ form.csrf_token }}
 
