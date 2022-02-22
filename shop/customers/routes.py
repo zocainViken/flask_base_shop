@@ -64,17 +64,6 @@ def tax_reductor(tax, price):
 
 
 import re
-def extract_mail(content):
-    content = content.replace('\\u200b', '')
-    mail_pattern = re.findall(r'[a-zA-Z0-9.-]+@[a-zA-Z-]+\.com', content, re.MULTILINE)
-    if mail_pattern:
-        return mail_pattern
-        print(mail_pattern)
-        #mail.append(f'{mail_pattern}')
-    else:
-        return 'NaN'
-        print('NaN')
-        #mail.append('NaN')
 # https://www.geeksforgeeks.org/check-if-email-address-valid-or-not-in-python/
 # Define a function for
 # for validating an Email
@@ -88,7 +77,7 @@ def check_email(email):
     laposte =r'[a-zA-Z0-9.-]+@laposte.net'
     orange =r'[a-zA-Z0-9.-]+@orange.fr'
     example =r'[a-zA-Z0-9.-]+@example.com'
-    templates = r'[a-zA-Z0-9.-]+@gmail.com|[a-zA-Z0-9.-]+@laposte.net|[a-zA-Z0-9.-]+@orange.fr|[a-zA-Z0-9.-]+@example.com'
+    templates = r'[a-zA-Z0-9.-]+@gmail.com|[a-zA-Z0-9.-]+@laposte.net|[a-zA-Z0-9.-]+@orange.fr|[a-zA-Z0-9.-]+@personal.example.com'
  
 
     # pass the regular expression
@@ -143,12 +132,12 @@ def customerLogin():
 
     if request.method == 'POST':
         form = CustomerLoginForm()
-        print(form.password.data)
-        print(form.username.data)
+        print('password: ', form.password.data)
+        print('name: ', form.username.data)
         username = form.username.data
         username = username.lower()
 #    if form.validate_on_submit():
-        user = Register.query.filter_by(name = form.username.data).first()
+        user = Register.query.filter_by(name = username).first()
         print(user)
         print(bcrypt.check_password_hash(user.password, form.password.data))
         if user and bcrypt.check_password_hash(user.password, form.password.data):

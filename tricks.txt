@@ -1,3 +1,6 @@
+apache2:
+apt install apache2 apache2-dev libapache2-mod-wsgi-py3
+
 
 python -m pip install flask-wtf
 flask wtf:
@@ -15,7 +18,11 @@ Flashing With Categories
 
 python -m pip install flask-uploads
 https://stackoverflow.com/questions/61628503/flask-uploads-importerror-cannot-import-name-secure-filename
+win:
 C:\Users\cozia\AppData\Local\Programs\Python\Python38\Lib\site-packages
+
+In flask_uploads.py
+
 this:
 	from werkzeug import secure_filename,FileStorage
 to:

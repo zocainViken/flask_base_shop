@@ -1,0 +1,11 @@
+flask
+flask_sqlalchemy
+flask_cors
+flask_bcrypt
+flask_uploads
+flask_msearch
+flask_login
+flask_migrate
+wtforms
+flask_wtf
+pdfkit
